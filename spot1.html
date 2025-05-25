@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>スポット①</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1 id="quiz-title">スポット①クイズ</h1>
+  <div class="card">
+    <p id="quiz-question">問題読み込み中...</p>
+    <div id="answers"></div>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    const char = "え";
+    const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
+
+    const quizList = [
+      {
+        question: "出雲大社で大きなしめ縄がある建物は？",
+        options: ["神楽殿", "拝殿", "本殿"],
+        answer: "神楽殿"
+      },
+      {
+        question: "出雲大社は何県にある？",
+        options: ["島根県", "鳥取県", "広島県"],
+        answer: "島根県"
+      },
+      {
+        question: "出雲大社の読み方は？",
+        options: ["いずもたいしゃ", "いずもおおやしろ", "いずもじんじゃ"],
+        answer: "いずもおおやしろ"
+      }
+    ];
+
+    const quiz = quizList[Math.floor(Math.random() * quizList.length)];
+    document.getElementById("quiz-question").textContent = quiz.question;
+
+    const answersDiv = document.getElementById("answers");
+    quiz.options.forEach(option => {
+      const btn = document.createElement("button");
+      btn.textContent = option;
+      btn.onclick = () => checkAnswer(option);
+      answersDiv.appendChild(btn);
+    });
+
+    function checkAnswer(selected) {
+      if (selected === quiz.answer) {
+        if (!earned.includes(char)) {
+          earned.push(char);
+          localStorage.setItem("earnedChars", JSON.stringify(earned));
+          document.getElementById("status").textContent = `正解！文字「${char}」をゲット！`;
+        } else {
+          document.getElementById("status").textContent = "もうゲット済みです。";
+        }
+      } else {
+        document.getElementById("status").textContent = "不正解。もう一度チャレンジ！";
+      }
+    }
+  </script>
+</body>
+  <ftter>
+    <p><a href="index.html">トップ画面に戻る</a></p>
+  </ftter>
+</html>
