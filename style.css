@@ -1,4 +1,4 @@
-/* 共通スタイル：style.css */
+/* style.css - 出雲大社クイズ共通デザイン（和風カラー + アニメーション） */
 
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -8,6 +8,70 @@ body {
   margin: 0;
 }
 
+/* --------------------
+   入力欄（パスワード）
+--------------------- */
+input[type="password"] {
+  font-size: 1.5em;
+  padding: 0.6em 1em;
+  width: 80%;
+  max-width: 400px;
+  margin: 1em auto;
+  display: block;
+  border: 2px solid #8f5e3c;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: fadeInUp 0.5s ease both;
+}
+
+/* --------------------
+   集めた文字ボックス
+--------------------- */
+.box-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 2em;
+}
+
+.char-box {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  line-height: 60px;
+  text-align: center;
+  border: 2px solid #6b4c3b;
+  border-radius: 10px;
+  background-color: #fff;
+  opacity: 0;
+  animation: popIn 0.5s ease forwards;
+}
+
+/* 順にふわっと出るように遅延 */
+#char1 { animation-delay: 0.1s; }
+#char2 { animation-delay: 0.2s; }
+#char3 { animation-delay: 0.3s; }
+#char4 { animation-delay: 0.4s; }
+#char5 { animation-delay: 0.5s; }
+
+/* --------------------
+   クイズ達成表示
+--------------------- */
+#complete {
+  margin-top: 1em;
+  font-weight: bold;
+  color: #2a7a2e;
+  text-align: center;
+  font-size: 1.3em;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.6s;
+}
+
+/* --------------------
+   見出し・レイアウト
+--------------------- */
 h1, h2 {
   color: #6b4c3b;
   text-align: center;
@@ -24,6 +88,20 @@ h1, h2 {
   margin-right: auto;
 }
 
+form {
+  text-align: left;
+  margin-top: 1em;
+}
+
+label {
+  display: block;
+  font-size: 1.1em;
+  margin: 8px 0;
+}
+
+/* --------------------
+   ボタン（ふわっと出て押すと縮む）
+--------------------- */
 button {
   display: block;
   width: 100%;
@@ -32,16 +110,24 @@ button {
   margin-top: 0.7em;
   border: none;
   border-radius: 8px;
-  background-color: #8f5e3c;
+  background-color: #a6714e;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  animation: fadeInUp 0.5s ease both;
+  transition: transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #a6714e;
+  background-color: #a6714e; /* ホバー色そのまま */
 }
 
+button:active {
+  transform: scale(0.95); /* クリック時に少し縮む */
+}
+
+/* --------------------
+   ステータスメッセージ
+--------------------- */
 #status, #collected {
   text-align: center;
   font-size: 1.2em;
@@ -55,7 +141,10 @@ button:hover {
   font-size: 1.3em;
 }
 
-a {
+/* --------------------
+   リンクボタン
+--------------------- */
+a, a.link-btn {
   display: block;
   background: #6b4c3b;
   color: white;
@@ -68,6 +157,47 @@ a {
   border-radius: 8px;
 }
 
-a:hover {
+a:hover, a.link-btn:hover {
   background: #8a6146;
+}
+
+/* --------------------
+   アニメーション定義
+--------------------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --------------------
+   スマホ対応
+--------------------- */
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  button, a.link-btn {
+    font-size: 16px;
+    padding: 10px;
+  }
 }
