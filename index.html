@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>出雲大社クイズラリー</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>出雲大社 クイズラリー</h1>
+  <div class="card">
+    <p>5つのスポットを回ってキーワードを集めよう！</p>
+    <a href="https://goo.gl/maps/xxxxx" target="_blank">🗺️ スポットマップを見る</a>
+
+    <h1>集めた文字</h1>
+    <div class="box-container">
+      <div class="char-box" id="char1">？</div>
+      <div class="char-box" id="char2">？</div>
+      <div class="char-box" id="char3">？</div>
+      <div class="char-box" id="char4">？</div>
+      <div class="char-box" id="char5">？</div>
+    </div>
+
+    <h2>スポット①</h2>
+    <input type="password" id="pw1" placeholder="合言葉を入力">
+    <button onclick="checkPass(1)">進む</button>
+
+    <h2>スポット②</h2>
+    <input type="password" id="pw2" placeholder="合言葉を入力">
+    <button onclick="checkPass(2)">進む</button>
+
+    <h2>スポット③</h2>
+    <input type="password" id="pw3" placeholder="合言葉を入力">
+    <button onclick="checkPass(3)">進む</button>
+
+    <h2>スポット④</h2>
+    <input type="password" id="pw4" placeholder="合言葉を入力">
+    <button onclick="checkPass(4)">進む</button>
+
+    <h2>スポット⑤</h2>
+    <input type="password" id="pw5" placeholder="合言葉を入力">
+    <button onclick="checkPass(5)">進む</button>
+
+    <div id="complete" style="display:none;">
+      <h2>🎉 全部そろったよ！景品をもらおう！</h2>
+       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdeEaEDRJsUfLq5dn64GfhHbJLWlMyoDC53MoB69YcGGlHv3A/viewform" target="_blank" class="link-btn">📝 アンケートに答える</a>
+    </div>
+
+    <p id="status"></p>
+  </div>
+
+  <script>
+    const targetWord = ["え", "に", "も", "し", "ろ"];
+    const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
+
+    for (let i = 0; i < 5; i++) {
+      const box = document.getElementById(`char${i + 1}`);
+      const char = targetWord[i];
+      box.textContent = earned.includes(char) ? char : "？";
+    }
+
+if (targetWord.every(c => earned.includes(c))) {
+  const complete = document.getElementById("complete");
+  complete.style.display = "block";
+  complete.style.opacity = "1";
+  complete.style.transform = "translateY(0)";
+}
+
+    const passwords = {
+      1: "kagura",
+      2: "sanpai",
+      3: "ookuninushi",
+      4: "kamimukae",
+      5: "shinjitsu"
+    };
+
+    function checkPass(num) {
+      const input = document.getElementById("pw" + num).value.trim();
+      if (input === passwords[num]) {
+        window.location.href = `spot${num}.html`;
+      } else {
+        document.getElementById("status").textContent = "パスワードが違います。";
+      }
+    }
+  </script>
+</body>
+</html>
