@@ -23,7 +23,7 @@
   </header>
 
   <main>
-    <h1 id="title">出雲大社 <span id="nicknameText"></span>のクイズラリー</h1>
+    <h1 id="title"></h1>
     <div class="card">
       <p>5つのスポットを回ってキーワードを集めよう！</p>
 
@@ -59,23 +59,31 @@
         <button onclick="checkPass(5)">進む</button>
       </div>
 
+            <p id="status"></p>
+
       <!-- 全問クリア時の表示 -->
       <div id="complete" style="display:none;">
         <h2>🎉 全部そろったよ！景品をもらおう！</h2>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdeEaEDRJsUfLq5dn64GfhHbJLWlMyoDC53MoB69YcGGlHv3A/viewform" target="_blank" class="link-btn">📝 アンケートに答える</a>
       </div>
 
-      <p id="status"></p>
+
     </div>
   </main>
 
 <script>
   const targetWord = ["え", "に", "も", "し", "ろ"];
   const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
-  const nickname = localStorage.getItem("nickname");
-  if (nickname) {
-    document.getElementById("nicknameText").textContent = nickname;
-  }
+// ニックネーム表示処理
+const nickname = localStorage.getItem("nickname");
+const titleEl = document.getElementById("title");
+
+if (nickname && nickname.trim()) {
+  titleEl.textContent = `出雲大社 ${nickname}のクイズラリー`;
+} else {
+  titleEl.textContent = "出雲大社 クイズラリー";
+}
+
 
 
 
