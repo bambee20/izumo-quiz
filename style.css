@@ -1,11 +1,88 @@
 /* style.css - 出雲大社クイズ共通デザイン（和風カラー + アニメーション） */
 
+/* --------------------
+   固定ヘッダーハンバーガーメニュー
+--------------------- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff4ea;
+  padding: 1em;
+  border-bottom: 2px solid #8f5e3c;
+  z-index: 1000;
+}
+
+.menu-toggle {
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #6b4c3b;
+}
+
+nav {
+  background-color: #fff;
+  border: 1px solid #8f5e3c;
+  border-radius: 8px;
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 1001;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  border-bottom: 1px solid #ddd;
+}
+
+nav li:last-child {
+  border-bottom: none;
+}
+
+nav a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #6b4c3b;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+nav a:hover {
+  background-color: #f9ede3;
+}
+
+.hidden {
+  display: none;
+}
+
+nav .disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* --------------------
+   基本設定
+--------------------- */
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   background-color: #fef9f5;
   color: #333;
   padding: 1em;
+  padding-top: 80px;
   margin: 0;
+}
+
+p{
+  text-align: center;
 }
 
 /* --------------------
@@ -47,7 +124,6 @@ input[type="password"] {
   animation: popIn 0.5s ease forwards;
 }
 
-/* 順にふわっと出るように遅延 */
 #char1 { animation-delay: 0.1s; }
 #char2 { animation-delay: 0.2s; }
 #char3 { animation-delay: 0.3s; }
@@ -118,11 +194,11 @@ button {
 }
 
 button:hover {
-  background-color: #a6714e; /* ホバー色そのまま */
+  background-color: #a6714e;
 }
 
 button:active {
-  transform: scale(0.95); /* クリック時に少し縮む */
+  transform: scale(0.95);
 }
 
 /* --------------------
@@ -160,6 +236,11 @@ a, a.link-btn {
 a:hover, a.link-btn:hover {
   background: #8a6146;
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 
 /* --------------------
    アニメーション定義
@@ -192,18 +273,21 @@ a:hover, a.link-btn:hover {
 @media (max-width: 450px) {
   body {
     font-size: 16px;
-    width: 450px;
+    width: auto;
   }
 
-  p{
-    text-align: center;
-  }
-  
   h1 {
     font-size: 22px;
   }
+
   button, a.link-btn {
     font-size: 16px;
     padding: 10px;
   }
+
+    .card{
+      font-size: 13px;
+    }
+    
+    
 }

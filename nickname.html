@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ニックネーム入力 - 出雲大社クイズラリー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <!-- ハンバーガーメニュー関連を削除 -->
+  <h1>出雲大社クイズラリー</h1>
+</header>
+
+<main>
+  <h1>ようこそ！</h1>
+  <div class="card">
+    <p>まずはニックネームを決めよう！</p>
+    <input type="text" id="nicknameInput" placeholder="ニックネームを入力" maxlength="20" />
+    <button onclick="submitNickname()">スタート！</button>
+  </div>
+</main>
+
+<script>
+  // ニックネーム送信処理
+  function submitNickname() {
+    const nickname = document.getElementById("nicknameInput").value.trim();
+    if (nickname === "") {
+      alert("ニックネームを入力してください。");
+      return;
+    }
+    localStorage.setItem("nickname", nickname);  // 保存
+    window.location.href = "index.html";         // メインページへ移動
+  }
+</script>
+
+</body>
+</html>
