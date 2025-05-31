@@ -23,7 +23,7 @@
   </header>
 
   <main>
-    <h1>出雲大社 <p id="nicknameDisplay" style="text-align:center;"></p>のクイズラリー</h1>
+    <h1 id="title">出雲大社 <span id="nicknameText"></span>のクイズラリー</h1>
     <div class="card">
       <p>5つのスポットを回ってキーワードを集めよう！</p>
 
@@ -73,9 +73,10 @@
   const targetWord = ["え", "に", "も", "し", "ろ"];
   const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
   const nickname = localStorage.getItem("nickname");
-// if (nickname) {
-//   document.getElementById("nicknameDisplay").textContent = `ようこそ、${nickname} さん！`;
-// }
+  if (nickname) {
+    document.getElementById("nicknameText").textContent = nickname;
+  }
+
 
 
   // 集めた文字を表示
