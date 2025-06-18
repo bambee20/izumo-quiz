@@ -2,28 +2,29 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>出雲大社クイズラリー</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>出雲大社 クイズラリー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- ハンバーガーメニュー付きヘッダー -->
+  <!-- ハンバーガーメニュー -->
   <header>
-    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="menu" class="hidden">
       <ul>
         <li><a href="index.html">ホーム</a></li>
         <li><a href="howtoplay.html">ゲームの遊び方</a></li>
         <li><a href="map.html">スポットマップ</a></li>
-        <!-- アンケートは達成時にJSで追加 -->
+        <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <h1 id="title"></h1>
+    <h1 id="title">出雲大社 クイズラリー</h1>
+
     <div class="card">
       <p>5つのスポットを回ってキーワードを集めよう！</p>
 
@@ -36,114 +37,90 @@
         <div class="char-box" id="char5">？</div>
       </div>
 
-      <!-- 各スポットの入力欄 -->
       <div id="spots">
         <h2>スポット①</h2>
-        <input type="password" id="pw1" placeholder="合言葉を入力">
+        <input type="password" id="pw1" placeholder="合言葉を入力" />
         <button onclick="checkPass(1)">進む</button>
 
         <h2>スポット②</h2>
-        <input type="password" id="pw2" placeholder="合言葉を入力">
+        <input type="password" id="pw2" placeholder="合言葉を入力" />
         <button onclick="checkPass(2)">進む</button>
 
         <h2>スポット③</h2>
-        <input type="password" id="pw3" placeholder="合言葉を入力">
+        <input type="password" id="pw3" placeholder="合言葉を入力" />
         <button onclick="checkPass(3)">進む</button>
 
         <h2>スポット④</h2>
-        <input type="password" id="pw4" placeholder="合言葉を入力">
+        <input type="password" id="pw4" placeholder="合言葉を入力" />
         <button onclick="checkPass(4)">進む</button>
 
         <h2>スポット⑤</h2>
-        <input type="password" id="pw5" placeholder="合言葉を入力">
+        <input type="password" id="pw5" placeholder="合言葉を入力" />
         <button onclick="checkPass(5)">進む</button>
       </div>
 
-            <p id="status"></p>
-
-      <!-- 全問クリア時の表示 -->
       <div id="complete" style="display:none;">
         <h2>🎉 全部そろったよ！景品をもらおう！</h2>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdeEaEDRJsUfLq5dn64GfhHbJLWlMyoDC53MoB69YcGGlHv3A/viewform" target="_blank" class="link-btn">📝 アンケートに答える</a>
+        <a href="https://docs.google.com/forms/..." target="_blank" class="link-btn">📝 アンケートに答える</a>
       </div>
 
-
+      <p id="status"></p>
     </div>
   </main>
 
 <script>
-  const targetWord = ["え", "ん", "む", "す", "び"];
+  const targetWord = ["か", "ぐ", "ら", "で", "ん"];
+  const passwords = {
+    1: "かぐら",       // か
+    2: "さんぱい",     // ぐ
+    3: "おおくにぬし", // ら
+    4: "かみむかえ",   // で
+    5: "しんもん"      // ん
+  };
+  const collectedChars = ["か", "ぐ", "ら", "で", "ん"];
+
+  // 取得済み文字の表示
   const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
-// ニックネーム表示処理
-const nickname = localStorage.getItem("nickname");
-const titleEl = document.getElementById("title");
-
-if (nickname && nickname.trim()) {
-  titleEl.textContent = `出雲大社 ${nickname}のクイズラリー`;
-} else {
-  titleEl.textContent = "出雲大社 クイズラリー";
-}
-
-
-
-
-  // 集めた文字を表示
-  for (let i = 0; i < 5; i++) {
-    const box = document.getElementById(`char${i + 1}`);
+  for (let i = 0; i < targetWord.length; i++) {
+    const box = document.getElementById("char" + (i + 1));
     const char = targetWord[i];
     box.textContent = earned.includes(char) ? char : "？";
   }
 
-  // 全部集まっていたら表示
+  // クイズ達成チェック
   if (targetWord.every(c => earned.includes(c))) {
     document.getElementById("complete").style.display = "block";
-
-    // メニューにアンケートリンクを追加
-    const navList = document.querySelector("#menu ul");
-    const existingSurvey = document.querySelector('#menu a[data-menu="survey"]');
-    if (!existingSurvey) {
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-      a.href = "https://docs.google.com/forms/d/e/1FAIpQLSdeEaEDRJsUfLq5dn64GfhHbJLWlMyoDC53MoB69YcGGlHv3A/viewform";
-      a.target = "_blank";
-      a.textContent = "📝 アンケートに答える";
-      a.setAttribute("data-menu", "survey");
-      li.appendChild(a);
-      navList.appendChild(li);
-    }
+    document.getElementById("surveyLink").style.display = "block";
   }
 
-  // パスワード処理
-  const passwords = {
-    1: "kagura",
-    2: "sanpai",
-    3: "ookuninushi",
-    4: "kamimukae",
-    5: "shinjitsu"
-  };
+  // ニックネーム取得＆表示
+  const nickname = localStorage.getItem("nickname");
+  if (nickname) {
+    document.getElementById("title").textContent = `出雲大社　${nickname} のクイズラリー`;
+  }
 
+  // ハンバーガーメニュー動作
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.classList.toggle("hidden");
+  }
+
+  // パスワードチェック処理
   function checkPass(num) {
-    const input = document.getElementById("pw" + num).value.trim();
-    if (input === passwords[num]) {
+    const input = document.getElementById("pw" + num).value.trim().toLowerCase();
+    const correct = passwords[num];
+    const char = collectedChars[num - 1];
+
+    if (input === correct) {
+      if (!earned.includes(char)) {
+        earned.push(char);
+        localStorage.setItem("earnedChars", JSON.stringify(earned));
+      }
       window.location.href = `spot${num}.html`;
     } else {
       document.getElementById("status").textContent = "パスワードが違います。";
     }
   }
-
-  // ハンバーガーメニューの制御
-  const toggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("menu");
-
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
-
-  document.querySelectorAll("#menu a").forEach(link => {
-    link.addEventListener("click", () => {
-      menu.classList.add("hidden");
-    });
-  });
 </script>
 
 </body>
