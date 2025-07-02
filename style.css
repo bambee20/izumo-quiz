@@ -1,6 +1,4 @@
-/* --------------------
-   基本設定
---------------------- */
+/* 基本設定 */
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   background-color: #fef9f5;
@@ -20,37 +18,84 @@ p {
   font-size: 14px;
 }
 
-/* --------------------
-   ヘッダー・メニュー
---------------------- */
+/* ヘッダー */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background-color: #fff4ea;
-  padding: 1em;
+  padding: 0 1em;
   border-bottom: 2px solid #8f5e3c;
   z-index: 1000;
   height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+/* タイトル */
+#title {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+/* ハンバーガーメニュー */
 .menu-toggle {
-  font-size: 1.8em;
+  width: 30px;
+  height: 24px;
+  position: relative;
   cursor: pointer;
-  color: #6b4c3b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  background-color: #6b4c3b;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* メニュー開いた時のアニメーション */
+.menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg);
+  position: relative;
+  top: 8px;
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  position: relative;
+  top: -8px;
+}
+
+/* ナビメニュー */
 nav {
-  background-color: #fff;
-  border: 1px solid #8f5e3c;
-  border-radius: 8px;
-  position: absolute;
-  top: 60px;
-  left: 10px;
+  position: fixed;
+  top: 55px;
+  left: 0;
   width: 200px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  z-index: 1001;
+  max-width: 80vw;
+  background-color: #fff4ea;
+  border-right: 3px solid #8f5e3c;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  height: calc(100vh - 55px);
+  overflow-y: auto;
+  z-index: 1100;
+  padding-top: 1em;
+}
+
+nav.open {
+  transform: translateX(0);
 }
 
 nav ul {
@@ -60,7 +105,7 @@ nav ul {
 }
 
 nav li {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #d3b992;
 }
 
 nav li:last-child {
@@ -69,96 +114,44 @@ nav li:last-child {
 
 nav a {
   display: block;
-  padding: 10px;
+  padding: 12px 20px;
   text-decoration: none;
   color: #6b4c3b;
-  font-weight: bold;
-  background-color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease;
 }
 
 nav a:hover {
   background-color: #f9ede3;
 }
 
-nav .disabled {
+/* オーバーレイ（メニュー開閉時の背景暗くする） */
+#overlay {
+  position: fixed;
+  top: 55px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 55px);
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
   pointer-events: none;
-  opacity: 0.4;
-  cursor: default;
+  transition: opacity 0.3s ease;
+  z-index: 1050;
 }
 
-.hidden {
-  display: none;
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
-/* --------------------
-   入力欄（テキスト・パスワード共通）
---------------------- */
-input[type="password"],
-input[type="text"],
-.nickname-input {
-  font-size: 1.5em;
-  padding: 0.6em 1em;
-  width: 80%;
-  max-width: 400px;
-  margin: 1em auto;
-  display: block;
-  border: 2px solid #8f5e3c;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  animation: fadeInUp 0.5s ease both;
-}
-
-/* --------------------
-   ボタン
---------------------- */
-button {
-  display: block;
-  width: 80%;
-  max-width: 400px;
-  font-size: 1.1em;
-  padding: 0.7em;
-  margin: 0.8em auto;
-  border: none;
-  border-radius: 8px;
-  background-color: #a6714e;
-  color: white;
-  cursor: pointer;
-  animation: fadeInUp 0.5s ease both;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #a6714e;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-/* --------------------
-   カード・セクション
---------------------- */
-.card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 1.5em;
-  margin: 0 auto 1.5em auto;
-  max-width: 600px;
-}
-
-.card h2 {
-  margin-top: 1.2em;
-}
-
-/* --------------------
-   集めた文字ボックス
---------------------- */
+/* 集めた文字ボックス */
 .box-container {
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .char-box {
@@ -170,34 +163,55 @@ button:active {
   border: 2px solid #6b4c3b;
   border-radius: 10px;
   background-color: #fff;
-  opacity: 0;
-  animation: popIn 0.5s ease forwards;
+  user-select: none;
 }
 
-#char1 { animation-delay: 0.1s; }
-#char2 { animation-delay: 0.2s; }
-#char3 { animation-delay: 0.3s; }
-#char4 { animation-delay: 0.4s; }
-#char5 { animation-delay: 0.5s; }
+/* スポットセクション */
+#spots > div {
+  margin-bottom: 2em;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-/* --------------------
-   クイズ達成表示
---------------------- */
+input[type="text"] {
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  width: 100%;
+  border: 2px solid #8f5e3c;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-bottom: 0.6em;
+}
+
+button {
+  width: 100%;
+  font-size: 1.1em;
+  padding: 0.7em;
+  border: none;
+  border-radius: 8px;
+  background-color: #a6714e;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #8f5e3c;
+}
+
+/* 完了メッセージ */
 #complete {
   margin-top: 1em;
   font-weight: bold;
   color: #2a7a2e;
   text-align: center;
   font-size: 1.3em;
-  opacity: 0;
-  transform: translateY(20px);
   animation: fadeInUp 0.8s ease forwards;
   animation-delay: 0.6s;
 }
 
-/* --------------------
-   ステータスメッセージ
---------------------- */
+/* ステータスメッセージ */
 #status {
   text-align: center;
   font-size: 1.2em;
@@ -205,10 +219,8 @@ button:active {
   color: #b33;
 }
 
-/* --------------------
-   リンクボタン
---------------------- */
-a, a.link-btn {
+/* リンク */
+a#surveyLink {
   display: block;
   background: #6b4c3b;
   color: white;
@@ -216,28 +228,16 @@ a, a.link-btn {
   text-align: center;
   padding: 0.7em;
   margin: 0.5em auto;
-  width: 90%;
   max-width: 400px;
   border-radius: 8px;
-  animation: fadeInUp 0.5s ease both;
+  transition: background-color 0.3s ease;
 }
 
-a:hover, a.link-btn:hover {
+a#surveyLink:hover {
   background: #8a6146;
 }
 
-.disabled {
-  pointer-events: none;
-  opacity: 0.3;
-}
-.spot-block {
-  margin-bottom: 2em;
-}
-
-
-/* --------------------
-   アニメーション
---------------------- */
+/* アニメーション */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -249,38 +249,14 @@ a:hover, a.link-btn:hover {
   }
 }
 
-@keyframes popIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* --------------------
-   スマホ対応
---------------------- */
+/* スマホ対応 */
 @media (max-width: 450px) {
-  body {
-    font-size: 16px;
-    width: auto;
+  header {
+    padding: 0 0.8em;
   }
 
-  h1 {
-    font-size: 21px;
-  }
-
-  .card {
-    font-size: 14px;
-    padding: 1em;
-  }
-
-  button, a.link-btn {
-    font-size: 16px;
-    padding: 10px;
+  #title {
+    font-size: 1.1rem;
   }
 
   .char-box {
@@ -288,5 +264,9 @@ a:hover, a.link-btn:hover {
     height: 48px;
     font-size: 20px;
     line-height: 48px;
+  }
+
+  nav {
+    width: 70vw;
   }
 }
