@@ -31,24 +31,32 @@
         <li>5つ全部そろったら、景品をゲット！</li>
       </ol>
       <p>※ 途中でページを閉じても、進行状況は保存されます。<br>最後にアンケートをお答えしていただくと助かります。</p>
+
+      <!-- ゲームを始めるボタン -->
+      <button onclick="startGame()">ゲームを始める</button>
     </div>
   </main>
 
-<script>
-  // ハンバーガーメニュー動作
-  const toggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("menu");
+  <script>
+    // ハンバーガーメニュー動作
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("menu");
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
-
-  document.querySelectorAll("#menu a").forEach(link => {
-    link.addEventListener("click", () => {
-      menu.classList.add("hidden");
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
     });
-  });
-</script>
+
+    document.querySelectorAll("#menu a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+      });
+    });
+
+    // 「ゲームを始める」ボタン押下で index.html に遷移
+    function startGame() {
+      window.location.href = "index.html";
+    }
+  </script>
 
 </body>
 </html>
