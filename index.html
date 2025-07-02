@@ -81,7 +81,6 @@
   </main>
 
 <script>
-  const targetWord = ["か", "ぐ", "ら", "で", "ん"];
   const passwords = {
     1: "かぐら",
     2: "さんぱい",
@@ -89,13 +88,22 @@
     4: "かみむかえ",
     5: "しんもん"
   };
-  const collectedChars = ["か", "ぐ", "ら", "で", "ん"];
+
+  const collectedChars = {
+    1: "か",
+    2: "ぐ",
+    3: "ら",
+    4: "で",
+    5: "ん"
+  };
+
   const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
 
   function updateCollectedChars() {
-    for (let i = 0; i < collectedChars.length; i++) {
-      const el = document.getElementById("char" + (i + 1));
-      el.textContent = earned.includes(collectedChars[i]) ? collectedChars[i] : "？";
+    for (let i = 1; i <= 5; i++) {
+      const el = document.getElementById("char" + i);
+      const char = collectedChars[i];
+      el.textContent = earned.includes(char) ? char : "？";
     }
   }
 
@@ -107,7 +115,7 @@
   function checkPass(spotNumber) {
     const input = document.getElementById("pw" + spotNumber).value.trim().toLowerCase().normalize("NFC");
     const answer = passwords[spotNumber];
-    const char = collectedChars[spotNumber - 1];
+    const char = collectedChars[spotNumber];
     const statusEl = document.getElementById("status");
 
     if (input === answer) {
@@ -137,11 +145,12 @@
 
   updateCollectedChars();
 
-  if (targetWord.every(c => earned.includes(c))) {
+  if (Object.values(collectedChars).every(c => earned.includes(c))) {
     document.getElementById("complete").style.display = "block";
     document.getElementById("surveyLink").style.display = "block";
   }
 </script>
+
 
 </body>
 </html>
