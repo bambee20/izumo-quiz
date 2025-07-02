@@ -253,6 +253,7 @@ a:hover, a.link-btn:hover {
   opacity: 0.3;
 }
 /* howtoplay.html の中央寄せ用 */
+/* カード全体 */
 .card {
   max-width: 600px;
   margin: 2em auto;
@@ -263,6 +264,7 @@ a:hover, a.link-btn:hover {
   text-align: center;
 }
 
+/* 手順リストは左寄せで */
 .card ol {
   text-align: left;
   margin: 0 auto 1.5em;
@@ -270,11 +272,19 @@ a:hover, a.link-btn:hover {
   line-height: 1.6;
 }
 
+/* 説明文は中央寄せのまま */
 .card p {
   font-size: 1em;
   line-height: 1.8;
   text-align: center;
 }
+
+/* ボタン中央寄せ */
+button {
+  display: block;
+  margin: 1em auto 0;
+}
+
 
 
 /* --------------------
