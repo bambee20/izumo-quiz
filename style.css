@@ -230,6 +230,10 @@ a:hover, a.link-btn:hover {
   pointer-events: none;
   opacity: 0.3;
 }
+.spot-block {
+  margin-bottom: 2em;
+}
+
 
 /* --------------------
    アニメーション
