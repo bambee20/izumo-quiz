@@ -9,18 +9,23 @@
 </head>
 <body>
 
-  <header>
-    <h1 id="title">出雲大社 クイズラリー</h1>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav id="menu" style="display:none;">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="howtoplay.html">ゲームの遊び方</a></li>
-        <li><a href="map.html">スポットマップ</a></li>
-        <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
-      </ul>
-    </nav>
-  </header>
+<header>
+  <h1 id="title">出雲大社 クイズラリー</h1>
+  <div class="menu-toggle" id="menu-toggle" aria-label="メニュー切替" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav id="menu" class="nav-menu">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
+      <li><a href="map.html">スポットマップ</a></li>
+      <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
+    </ul>
+  </nav>
+</header>
+
 
   <main>
     <p>合言葉を入力してスポットのリンクを表示しよう！</p>
