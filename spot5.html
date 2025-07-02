@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>スポット①</title>
+  <title>スポット⑤</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,30 +13,31 @@
     <p id="status"></p>
   </div>
 
+  <footer>
+    <p><a href="index.html">トップ画面に戻る</a></p>
+  </footer>
+
   <script>
-    const char = "ろ";
+    const char = "ん"; // ← index.htmlのスポット⑤に合わせる
     const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
 
-const quizList = [
-  {
-    question: "出雲大社では何回おじぎする？",
-    options: ["2礼2拍手1礼", "1礼4拍手2礼", "2礼4拍手1礼"],
-    answer: "2礼4拍手1礼"
-  },
-  {
-    question: "大国主命はどの神話に出てくる？",
-    options: ["古事記", "日本書紀", "万葉集"],
-    answer: "古事記"
-  },
-  {
-    question: "出雲大社の門前町の名前は？",
-    options: ["神門通り", "鳥居坂", "社前通り"],
-    answer: "神門通り"
-  }
-];
-
-
-
+    const quizList = [
+      {
+        question: "出雲大社では何回おじぎする？",
+        options: ["2礼2拍手1礼", "1礼4拍手2礼", "2礼4拍手1礼"],
+        answer: "2礼4拍手1礼"
+      },
+      {
+        question: "大国主命はどの神話に出てくる？",
+        options: ["古事記", "日本書紀", "万葉集"],
+        answer: "古事記"
+      },
+      {
+        question: "出雲大社の門前町の名前は？",
+        options: ["神門通り", "鳥居坂", "社前通り"],
+        answer: "神門通り"
+      }
+    ];
 
     const quiz = quizList[Math.floor(Math.random() * quizList.length)];
     document.getElementById("quiz-question").textContent = quiz.question;
@@ -50,22 +51,22 @@ const quizList = [
     });
 
     function checkAnswer(selected) {
+      const statusEl = document.getElementById("status");
       if (selected === quiz.answer) {
         if (!earned.includes(char)) {
           earned.push(char);
           localStorage.setItem("earnedChars", JSON.stringify(earned));
-          document.getElementById("status").textContent = `正解！文字「${char}」をゲット！`;
+          statusEl.style.color = "green";
+          statusEl.textContent = `正解！文字「${char}」をゲット！`;
         } else {
-          document.getElementById("status").textContent = "もうゲット済みです。";
+          statusEl.style.color = "blue";
+          statusEl.textContent = "もうゲット済みです。";
         }
       } else {
-        document.getElementById("status").textContent = "不正解。もう一度チャレンジ！";
+        statusEl.style.color = "red";
+        statusEl.textContent = "不正解。もう一度チャレンジ！";
       }
     }
   </script>
 </body>
-  <ftter>
-    <p><a href="index.html">トップ画面に戻る</a></p>
-  </ftter>
 </html>
-
