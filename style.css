@@ -1,7 +1,27 @@
-/* style.css - 出雲大社クイズ共通デザイン（和風カラー + アニメーション + スマホ対応） */
+/* --------------------
+   基本設定
+--------------------- */
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: #fef9f5;
+  color: #333;
+  padding: 1em;
+  padding-top: 80px;
+  margin: 0;
+}
+
+h1, h2 {
+  color: #6b4c3b;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
+}
 
 /* --------------------
-   固定ヘッダーとハンバーガーメニュー
+   ヘッダー・メニュー
 --------------------- */
 header {
   position: fixed;
@@ -12,6 +32,7 @@ header {
   padding: 1em;
   border-bottom: 2px solid #8f5e3c;
   z-index: 1000;
+  height: 55px;
 }
 
 .menu-toggle {
@@ -48,7 +69,7 @@ nav li:last-child {
 
 nav a {
   display: block;
-  padding: 12px;
+  padding: 10px;
   text-decoration: none;
   color: #6b4c3b;
   font-weight: bold;
@@ -59,55 +80,22 @@ nav a:hover {
   background-color: #f9ede3;
 }
 
+nav .disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: default;
+}
+
 .hidden {
   display: none;
 }
 
 /* --------------------
-   基本スタイル
+   入力欄（テキスト・パスワード共通）
 --------------------- */
-body {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  background-color: #fef9f5;
-  color: #333;
-  padding: 1em;
-  padding-top: 100px;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-main {
-  max-width: 700px;
-  margin: auto;
-}
-
-/* --------------------
-   タイトル・見出し
---------------------- */
-h1, h2 {
-  color: #6b4c3b;
-  text-align: center;
-}
-
-h1 {
-  font-size: 1.8em;
-  margin-bottom: 0.5em;
-}
-
-.card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 1.5em;
-  margin-bottom: 1.5em;
-}
-
-/* --------------------
-   入力フォーム（合言葉・ニックネーム）
---------------------- */
-input[type="text"],
 input[type="password"],
-input.keyword-input {
+input[type="text"],
+.nickname-input {
   font-size: 1.5em;
   padding: 0.6em 1em;
   width: 80%;
@@ -121,15 +109,50 @@ input.keyword-input {
 }
 
 /* --------------------
-   スポットブロック
+   ボタン
 --------------------- */
-.spot-block {
-  margin-bottom: 2em;
-  text-align: center;
+button {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  font-size: 1.1em;
+  padding: 0.7em;
+  margin: 0.8em auto;
+  border: none;
+  border-radius: 8px;
+  background-color: #a6714e;
+  color: white;
+  cursor: pointer;
+  animation: fadeInUp 0.5s ease both;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #a6714e;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 /* --------------------
-   集めた文字表示
+   カード・セクション
+--------------------- */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1.5em;
+  margin: 0 auto 1.5em auto;
+  max-width: 600px;
+}
+
+.card h2 {
+  margin-top: 1.2em;
+}
+
+/* --------------------
+   集めた文字ボックス
 --------------------- */
 .box-container {
   display: flex;
@@ -158,7 +181,7 @@ input.keyword-input {
 #char5 { animation-delay: 0.5s; }
 
 /* --------------------
-   完了表示とステータス
+   クイズ達成表示
 --------------------- */
 #complete {
   margin-top: 1em;
@@ -172,69 +195,40 @@ input.keyword-input {
   animation-delay: 0.6s;
 }
 
-#status, #collected {
+/* --------------------
+   ステータスメッセージ
+--------------------- */
+#status {
   text-align: center;
   font-size: 1.2em;
   margin-top: 1em;
-}
-
-.success {
-  color: #2a7a2e;
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.3em;
-}
-
-/* --------------------
-   ボタン
---------------------- */
-button {
-  display: block;
-  width: 80%;
-  max-width: 400px;
-  font-size: 1.1em;
-  padding: 0.7em;
-  margin: 0.5em auto;
-  border: none;
-  border-radius: 8px;
-  background-color: #a6714e;
-  color: white;
-  cursor: pointer;
-  animation: fadeInUp 0.5s ease both;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #8f5e3c;
-}
-
-button:active {
-  transform: scale(0.95);
+  color: #b33;
 }
 
 /* --------------------
    リンクボタン
 --------------------- */
-a.link-btn {
+a, a.link-btn {
   display: block;
   background: #6b4c3b;
   color: white;
   text-decoration: none;
   text-align: center;
   padding: 0.7em;
-  margin: 1em auto;
+  margin: 0.5em auto;
   width: 90%;
   max-width: 400px;
   border-radius: 8px;
+  animation: fadeInUp 0.5s ease both;
 }
 
-a.link-btn:hover {
+a:hover, a.link-btn:hover {
   background: #8a6146;
 }
 
-a.disabled {
+.disabled {
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 /* --------------------
@@ -265,25 +259,30 @@ a.disabled {
 /* --------------------
    スマホ対応
 --------------------- */
-@media (max-width: 480px) {
+@media (max-width: 450px) {
   body {
     font-size: 16px;
-    padding: 1em;
+    width: auto;
   }
 
   h1 {
-    font-size: 1.5em;
+    font-size: 21px;
+  }
+
+  .card {
+    font-size: 14px;
+    padding: 1em;
+  }
+
+  button, a.link-btn {
+    font-size: 16px;
+    padding: 10px;
   }
 
   .char-box {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     font-size: 20px;
-    line-height: 50px;
-  }
-
-  input, button, a.link-btn {
-    font-size: 1em;
-    padding: 0.6em;
+    line-height: 48px;
   }
 }
