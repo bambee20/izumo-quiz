@@ -139,25 +139,6 @@
     const char = collectedChars[spotNumber - 1];
     const statusEl = document.getElementById("status");
 
-    if (input === answer) {
-      if (!earned.includes(char)) {
-        earned.push(char);
-        localStorage.setItem("earnedChars", JSON.stringify(earned));
-        updateCollectedChars();
-        statusEl.style.color = "green";
-        statusEl.textContent = `合言葉正解！文字「${char}」をゲット！スポット${spotNumber}へ移動します。`;
-        setTimeout(() => {
-          window.location.href = `spot${spotNumber}.html`;
-        }, 1000);
-      } else {
-        statusEl.style.color = "blue";
-        statusEl.textContent = "そのスポットはもうクリアしています。";
-      }
-    } else {
-      statusEl.style.color = "red";
-      statusEl.textContent = "合言葉が違います。もう一度確認してください。";
-    }
-  }
 </script>
 
 </body>
