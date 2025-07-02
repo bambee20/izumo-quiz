@@ -11,23 +11,20 @@
 
   <header>
     <h1 id="title">出雲大社 クイズラリー</h1>
-    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
+    <div class="menu-toggle" onclick="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </div>
+    <nav id="menu">
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="howtoplay.html">ゲームの遊び方</a></li>
+        <li><a href="map.html">スポットマップ</a></li>
+        <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
+      </ul>
+    </nav>
   </header>
-
-  <nav id="menu" aria-hidden="true">
-    <ul>
-      <li><a href="index.html">ホーム</a></li>
-      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
-      <li><a href="map.html">スポットマップ</a></li>
-      <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
-    </ul>
-  </nav>
-
-  <div id="overlay"></div>
 
   <main>
     <div>
@@ -43,31 +40,31 @@
       </div>
 
       <div id="spots">
-        <div>
+        <div class="spot-block">
           <h2>スポット①</h2>
           <input type="text" id="pw1" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(1)">進む</button>
         </div>
 
-        <div>
+        <div class="spot-block">
           <h2>スポット②</h2>
           <input type="text" id="pw2" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(2)">進む</button>
         </div>
 
-        <div>
+        <div class="spot-block">
           <h2>スポット③</h2>
           <input type="text" id="pw3" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(3)">進む</button>
         </div>
 
-        <div>
+        <div class="spot-block">
           <h2>スポット④</h2>
           <input type="text" id="pw4" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(4)">進む</button>
         </div>
 
-        <div>
+        <div class="spot-block">
           <h2>スポット⑤</h2>
           <input type="text" id="pw5" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(5)">進む</button>
@@ -103,34 +100,8 @@
   }
 
   function toggleMenu() {
-    const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById("menu");
-    const overlay = document.getElementById("overlay");
-
-    menuToggle.classList.toggle("open");
-    menu.classList.toggle("open");
-    overlay.classList.toggle("active");
-
-    // アクセシビリティ用
-    const isOpen = menu.classList.contains("open");
-    menu.setAttribute("aria-hidden", !isOpen);
-    menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
-  }
-
-  document.getElementById("menuToggle").addEventListener("click", toggleMenu);
-  document.getElementById("overlay").addEventListener("click", toggleMenu);
-
-  // ニックネーム取得＆反映
-  const nickname = localStorage.getItem("nickname");
-  if (nickname) {
-    document.getElementById("title").textContent = `出雲大社　${nickname} のクイズラリー`;
-  }
-
-  updateCollectedChars();
-
-  if (targetWord.every(c => earned.includes(c))) {
-    document.getElementById("complete").style.display = "block";
-    document.getElementById("surveyLink").style.display = "block";
+    menu.classList.toggle("active");
   }
 
   function checkPass(spotNumber) {
@@ -157,6 +128,18 @@
       statusEl.style.color = "red";
       statusEl.textContent = "合言葉が違います。もう一度確認してください。";
     }
+  }
+
+  const nickname = localStorage.getItem("nickname");
+  if (nickname) {
+    document.getElementById("title").textContent = `出雲大社　${nickname} のクイズラリー`;
+  }
+
+  updateCollectedChars();
+
+  if (targetWord.every(c => earned.includes(c))) {
+    document.getElementById("complete").style.display = "block";
+    document.getElementById("surveyLink").style.display = "block";
   }
 </script>
 
