@@ -23,62 +23,98 @@
   </header>
 
   <main>
-    <div>
-      <p>5つのスポットを回ってキーワードを集めよう！</p>
+    <p>合言葉を入力してスポットのリンクを表示しよう！</p>
 
-      <h2>集めた文字</h2>
-      <div class="box-container">
-        <div class="char-box" id="char1">？</div>
-        <div class="char-box" id="char2">？</div>
-        <div class="char-box" id="char3">？</div>
-        <div class="char-box" id="char4">？</div>
-        <div class="char-box" id="char5">？</div>
-      </div>
-
-      <div id="spots">
-        <div>
-          <h2>スポット①</h2>
-          <a href="spot1.html"><button>進む</button></a>
-        </div>
-
-        <div>
-          <h2>スポット②</h2>
-          <a href="spot2.html"><button>進むく</button></a>
-        </div>
-
-        <div>
-          <h2>スポット③</h2>
-          <a href="spot3.html"><button>進む</button></a>
-        </div>
-
-        <div>
-          <h2>スポット④</h2>
-          <a href="spot4.html"><button>進む</button></a>
-        </div>
-
-        <div>
-          <h2>スポット⑤</h2>
-          <a href="spot5.html"><button>進む</button></a>
+    <div id="passwordInputs">
+      <div>
+        <label for="pw1">スポット① 合言葉：</label>
+        <input type="text" id="pw1" autocomplete="off" />
+        <button onclick="checkPassword(1)">確認</button>
+        <div class="spot-link" id="link1" style="display:none;">
+          <a href="spot1.html">スポット①へ進む</a>
         </div>
       </div>
-
-      <div id="complete" style="display:none;">
-        <h2>🎉 全部そろったよ！景品をもらおう！</h2>
-        <a href="https://docs.google.com/forms/..." target="_blank">📝 アンケートに答える</a>
+      <div>
+        <label for="pw2">スポット② 合言葉：</label>
+        <input type="text" id="pw2" autocomplete="off" />
+        <button onclick="checkPassword(2)">確認</button>
+        <div class="spot-link" id="link2" style="display:none;">
+          <a href="spot2.html">スポット②へ進む</a>
+        </div>
       </div>
-
-      <p id="status"></p>
+      <div>
+        <label for="pw3">スポット③ 合言葉：</label>
+        <input type="text" id="pw3" autocomplete="off" />
+        <button onclick="checkPassword(3)">確認</button>
+        <div class="spot-link" id="link3" style="display:none;">
+          <a href="spot3.html">スポット③へ進む</a>
+        </div>
+      </div>
+      <div>
+        <label for="pw4">スポット④ 合言葉：</label>
+        <input type="text" id="pw4" autocomplete="off" />
+        <button onclick="checkPassword(4)">確認</button>
+        <div class="spot-link" id="link4" style="display:none;">
+          <a href="spot4.html">スポット④へ進む</a>
+        </div>
+      </div>
+      <div>
+        <label for="pw5">スポット⑤ 合言葉：</label>
+        <input type="text" id="pw5" autocomplete="off" />
+        <button onclick="checkPassword(5)">確認</button>
+        <div class="spot-link" id="link5" style="display:none;">
+          <a href="spot5.html">スポット⑤へ進む</a>
+        </div>
+      </div>
     </div>
+
+    <h2>集めた文字</h2>
+    <div class="box-container">
+      <div class="char-box" id="char1">？</div>
+      <div class="char-box" id="char2">？</div>
+      <div class="char-box" id="char3">？</div>
+      <div class="char-box" id="char4">？</div>
+      <div class="char-box" id="char5">？</div>
+    </div>
+
+    <div id="complete" style="display:none;">
+      <h2>🎉 全部そろったよ！景品をもらおう！</h2>
+      <a href="https://docs.google.com/forms/..." target="_blank">📝 アンケートに答える</a>
+    </div>
+
+    <p id="status"></p>
   </main>
 
 <script>
+  const passwords = {
+    1: "かぐら",
+    2: "さんぱい",
+    3: "おおくにぬし",
+    4: "かみむかえ",
+    5: "しんもん"
+  };
   const targetWord = ["か", "ぐ", "ら", "で", "ん"];
-  const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
+  let earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
 
   function updateCollectedChars() {
-    for (let i = 0; i < targetWord.length; i++) {
-      const el = document.getElementById("char" + (i + 1));
+    for(let i=0; i<targetWord.length; i++) {
+      const el = document.getElementById("char" + (i+1));
       el.textContent = earned.includes(targetWord[i]) ? targetWord[i] : "？";
+    }
+  }
+
+  function checkPassword(num) {
+    const input = document.getElementById("pw" + num).value.trim().toLowerCase().normalize("NFC");
+    const statusEl = document.getElementById("status");
+
+    if(input === passwords[num]) {
+      document.getElementById("link" + num).style.display = "block";
+      statusEl.style.color = "green";
+      statusEl.textContent = `スポット${num}へのリンクが表示されました！`;
+    } else {
+      statusEl.style.color = "red";
+      statusEl.textContent = `スポット${num}の合言葉が違います。もう一度確認してください。`;
+      document.getElementById("link" + num).style.display = "none";
     }
   }
 
@@ -87,9 +123,11 @@
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   }
 
+  // 文字の更新
   updateCollectedChars();
 
-  if (targetWord.every(c => earned.includes(c))) {
+  // 全てゲットしたらアンケートリンク表示
+  if(targetWord.every(c => earned.includes(c))) {
     document.getElementById("complete").style.display = "block";
     document.getElementById("surveyLink").style.display = "block";
   }
