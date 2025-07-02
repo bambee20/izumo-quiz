@@ -1,7 +1,7 @@
-/* style.css - 出雲大社クイズ共通デザイン（和風カラー + アニメーション） */
+/* style.css - 出雲大社クイズ共通デザイン（和風カラー + アニメーション + スマホ対応） */
 
 /* --------------------
-   固定ヘッダーハンバーガーメニュー
+   固定ヘッダーとハンバーガーメニュー
 --------------------- */
 header {
   position: fixed;
@@ -12,7 +12,6 @@ header {
   padding: 1em;
   border-bottom: 2px solid #8f5e3c;
   z-index: 1000;
-  height: 55px;
 }
 
 .menu-toggle {
@@ -49,7 +48,7 @@ nav li:last-child {
 
 nav a {
   display: block;
-  padding: 10px;
+  padding: 12px;
   text-decoration: none;
   color: #6b4c3b;
   font-weight: bold;
@@ -64,33 +63,51 @@ nav a:hover {
   display: none;
 }
 
-nav .disabled {
-  pointer-events: none;
-  opacity: 0.4;
-  cursor: default;
-}
-
 /* --------------------
-   基本設定
+   基本スタイル
 --------------------- */
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   background-color: #fef9f5;
   color: #333;
   padding: 1em;
-  padding-top: 80px;
+  padding-top: 100px;
   margin: 0;
+  box-sizing: border-box;
 }
 
-p{
-  text-align: center;
-  font-size: 13px;
+main {
+  max-width: 700px;
+  margin: auto;
 }
 
 /* --------------------
-   入力欄（パスワード）
+   タイトル・見出し
 --------------------- */
-input[type="password"] {
+h1, h2 {
+  color: #6b4c3b;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+/* --------------------
+   入力フォーム（合言葉・ニックネーム）
+--------------------- */
+input[type="text"],
+input[type="password"],
+input.keyword-input {
   font-size: 1.5em;
   padding: 0.6em 1em;
   width: 80%;
@@ -104,7 +121,15 @@ input[type="password"] {
 }
 
 /* --------------------
-   集めた文字ボックス
+   スポットブロック
+--------------------- */
+.spot-block {
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+/* --------------------
+   集めた文字表示
 --------------------- */
 .box-container {
   display: flex;
@@ -133,7 +158,7 @@ input[type="password"] {
 #char5 { animation-delay: 0.5s; }
 
 /* --------------------
-   クイズ達成表示
+   完了表示とステータス
 --------------------- */
 #complete {
   margin-top: 1em;
@@ -147,65 +172,6 @@ input[type="password"] {
   animation-delay: 0.6s;
 }
 
-/* --------------------
-   見出し・レイアウト
---------------------- */
-h1, h2 {
-  color: #6b4c3b;
-  text-align: center;
-}
-
-.card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 1.5em;
-  margin-bottom: 1.5em;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-form {
-  text-align: left;
-  margin-top: 1em;
-}
-
-label {
-  display: block;
-  font-size: 1.1em;
-  margin: 8px 0;
-}
-
-/* --------------------
-   ボタン（ふわっと出て押すと縮む）
---------------------- */
-button {
-  display: block;
-  width: 100%;
-  font-size: 1.1em;
-  padding: 0.7em;
-  margin-top: 0.7em;
-  border: none;
-  border-radius: 8px;
-  background-color: #a6714e;
-  color: white;
-  cursor: pointer;
-  animation: fadeInUp 0.5s ease both;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #a6714e;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-/* --------------------
-   ステータスメッセージ
---------------------- */
 #status, #collected {
   text-align: center;
   font-size: 1.2em;
@@ -220,47 +186,59 @@ button:active {
 }
 
 /* --------------------
+   ボタン
+--------------------- */
+button {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  font-size: 1.1em;
+  padding: 0.7em;
+  margin: 0.5em auto;
+  border: none;
+  border-radius: 8px;
+  background-color: #a6714e;
+  color: white;
+  cursor: pointer;
+  animation: fadeInUp 0.5s ease both;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #8f5e3c;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* --------------------
    リンクボタン
 --------------------- */
-a, a.link-btn {
+a.link-btn {
   display: block;
   background: #6b4c3b;
   color: white;
   text-decoration: none;
   text-align: center;
   padding: 0.7em;
-  margin: 0.5em auto;
+  margin: 1em auto;
   width: 90%;
   max-width: 400px;
   border-radius: 8px;
 }
 
-a:hover, a.link-btn:hover {
+a.link-btn:hover {
   background: #8a6146;
 }
-.disabled {
+
+a.disabled {
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.5;
 }
-
-/* ニックネーム入力欄（合言葉と統一デザイン） */
-.nickname-input {
-  font-size: 1.5em;
-  padding: 0.6em 1em;
-  width: 80%;
-  max-width: 400px;
-  margin: 1em auto;
-  display: block;
-  border: 2px solid #8f5e3c;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  animation: fadeInUp 0.5s ease both;
-}
-
-
 
 /* --------------------
-   アニメーション定義
+   アニメーション
 --------------------- */
 @keyframes fadeInUp {
   from {
@@ -287,23 +265,25 @@ a:hover, a.link-btn:hover {
 /* --------------------
    スマホ対応
 --------------------- */
-@media (max-width: 450px) {
+@media (max-width: 480px) {
   body {
     font-size: 16px;
-    width: auto;
+    padding: 1em;
   }
 
   h1 {
-    font-size: 21px;
+    font-size: 1.5em;
   }
 
-  button, a.link-btn {
-    font-size: 16px;
-    padding: 10px;
+  .char-box {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
   }
 
-    .card{
-      font-size: 13px;
-    }
-    
+  input, button, a.link-btn {
+    font-size: 1em;
+    padding: 0.6em;
+  }
 }
