@@ -91,8 +91,8 @@ header {
 /* ナビメニュー */
 nav {
   position: fixed;
-  top: 55px;
-  left: 0;
+  top: 60px;
+  right: 10px;
   width: 220px;
   background-color: #fff4ea;
   border-right: 3px solid #8f5e3c;
@@ -258,6 +258,14 @@ a#surveyLink:hover {
     transform: translateY(0);
   }
 }
+
+@media (min-width: 768px) {
+  nav {
+    top: 55px;
+    right: 20px;
+  }
+}
+
 
 /* スマホ対応 */
 @media (max-width: 450px) {
