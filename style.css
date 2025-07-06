@@ -3,19 +3,23 @@ body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   background-color: #fef9f5;
   color: #333;
+  margin: 0;
   padding: 1em;
   padding-top: 80px;
-  margin: 0;
+  box-sizing: border-box;
 }
 
 h1, h2 {
   color: #6b4c3b;
   text-align: center;
+  margin: 1em 0 0.5em;
 }
 
 p {
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 1em 0;
 }
 
 /* ヘッダー */
@@ -23,7 +27,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 95%;
+  width: 100%;
   background-color: #fff4ea;
   padding: 0 1em;
   border-bottom: 2px solid #8f5e3c;
@@ -34,7 +38,6 @@ header {
   justify-content: space-between;
 }
 
-/* タイトル */
 #title {
   font-size: 1.4rem;
   margin: 0;
@@ -59,21 +62,18 @@ header {
   transition: all 0.3s ease;
 }
 
-/* メニュー開いた時のアニメーション */
 .menu-toggle.open span:nth-child(1) {
   transform: rotate(45deg);
-  position: relative;
   top: 11px;
+  position: relative;
 }
-
 .menu-toggle.open span:nth-child(2) {
   opacity: 0;
 }
-
 .menu-toggle.open span:nth-child(3) {
   transform: rotate(-45deg);
-  position: relative;
   top: -8px;
+  position: relative;
 }
 
 /* ナビメニュー */
@@ -81,8 +81,7 @@ nav {
   position: fixed;
   top: 55px;
   left: 0;
-  width: 200px;
-  max-width: 80vw;
+  width: 220px;
   background-color: #fff4ea;
   border-right: 3px solid #8f5e3c;
   box-shadow: 2px 0 10px rgba(0,0,0,0.15);
@@ -126,7 +125,7 @@ nav a:hover {
   background-color: #f9ede3;
 }
 
-/* オーバーレイ（メニュー開閉時の背景暗くする） */
+/* オーバーレイ */
 #overlay {
   position: fixed;
   top: 55px;
@@ -150,8 +149,7 @@ nav a:hover {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin: 2em 0;
 }
 
 .char-box {
@@ -166,7 +164,7 @@ nav a:hover {
   user-select: none;
 }
 
-/* スポットセクション */
+/* スポット入力エリア */
 #spots > div {
   margin-bottom: 2em;
   max-width: 400px;
@@ -219,7 +217,7 @@ button:hover {
   color: #b33;
 }
 
-/* リンク */
+/* リンクボタン */
 a#surveyLink {
   display: block;
   background: #6b4c3b;
@@ -268,5 +266,10 @@ a#surveyLink:hover {
 
   nav {
     width: 70vw;
+  }
+
+  input[type="text"],
+  button {
+    font-size: 1em;
   }
 }
