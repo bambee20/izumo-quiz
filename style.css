@@ -1,122 +1,58 @@
-/* 基本設定 */
-body {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  background-color: #fef9f5;
-  color: #333;
-  margin: 0;
-  padding: 1em;
-  padding-top: 80px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 和風デザイン + モバイル・PC対応 */
 
-}
-
-h1, h2 {
-  color: #6b4c3b;
-  text-align: center;
-  margin: 1em 0 0.5em;
-}
-
-p {
-  text-align: center;
-  font-size: 15px;
-  line-height: 1.6;
-  margin: 1em 0;
-}
-
-/* ヘッダー */
+/* --------------------
+   ヘッダー
+--------------------- */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background-color: #fff4ea;
+  padding: 0.8em 1em;
   border-bottom: 2px solid #8f5e3c;
   z-index: 1000;
-  height: 55px;
-
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 1em;
-
-  /* 追加：中央寄せと最大幅 */
-  max-width: 960px;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
+  align-items: center;
 }
 
-
-#title {
-  font-size: 1.4rem;
+header h1 {
+  font-size: 1.2em;
+  color: #6b4c3b;
   margin: 0;
 }
 
-/* ハンバーガーメニュー */
+/* --------------------
+   ハンバーガーメニュー
+--------------------- */
 .menu-toggle {
-  width: 30px;
-  height: 24px;
-  position: relative;
+  font-size: 1.8em;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  color: #6b4c3b;
+  z-index: 1100;
 }
 
-.menu-toggle span {
-  display: block;
-  height: 4px;
-  background-color: #6b4c3b;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.menu-toggle.open span:nth-child(1) {
-  transform: rotate(45deg);
-  top: 11px;
-  position: relative;
-}
-.menu-toggle.open span:nth-child(2) {
-  opacity: 0;
-}
-.menu-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg);
-  top: -8px;
-  position: relative;
-}
-
-/* ナビメニュー */
 nav {
-  position: fixed;
-  top: 60px;
+  position: absolute;
+  top: 55px;
   right: 10px;
   width: 220px;
-  background-color: #fff4ea;
-  border-right: 3px solid #8f5e3c;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.15);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  height: calc(100vh - 55px);
-  overflow-y: auto;
-  z-index: 1100;
-  padding-top: 1em;
-}
-
-nav.open {
-  transform: translateX(0);
+  background-color: #fff;
+  border: 1px solid #8f5e3c;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
 }
 
 nav ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 nav li {
-  border-bottom: 1px solid #d3b992;
+  border-bottom: 1px solid #ddd;
 }
 
 nav li:last-child {
@@ -125,43 +61,101 @@ nav li:last-child {
 
 nav a {
   display: block;
-  padding: 12px 20px;
-  text-decoration: none;
+  padding: 12px;
   color: #6b4c3b;
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: background-color 0.2s ease;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 nav a:hover {
   background-color: #f9ede3;
 }
 
-/* オーバーレイ */
-#overlay {
-  position: fixed;
-  top: 55px;
-  left: 0;
-  width: 100vw;
-  height: calc(100vh - 55px);
-  background-color: rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1050;
+.hidden {
+  display: none;
 }
 
-#overlay.active {
-  opacity: 1;
-  pointer-events: all;
+/* --------------------
+   全体・基本
+--------------------- */
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: #fef9f5;
+  color: #333;
+  padding-top: 80px;
+  margin: 0;
 }
 
-/* 集めた文字ボックス */
+h2, h1 {
+  text-align: center;
+  color: #6b4c3b;
+}
+
+p {
+  text-align: center;
+}
+
+/* --------------------
+   カード（中央の白背景）
+--------------------- */
+.card {
+  background: #fff;
+  max-width: 600px;
+  margin: 0 auto 2em;
+  padding: 1.5em;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* --------------------
+   合言葉入力欄
+--------------------- */
+input[type="text"], .nickname-input {
+  font-size: 1.2em;
+  padding: 0.6em 1em;
+  width: 80%;
+  max-width: 400px;
+  margin: 1em auto;
+  display: block;
+  border: 2px solid #8f5e3c;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* --------------------
+   ボタン
+--------------------- */
+button {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 0.5em auto;
+  padding: 0.7em;
+  font-size: 1.1em;
+  background-color: #a6714e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #8a6146;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* --------------------
+   文字ボックス
+--------------------- */
 .box-container {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin: 2em 0;
+  margin: 1em 0;
 }
 
 .char-box {
@@ -173,108 +167,74 @@ nav a:hover {
   border: 2px solid #6b4c3b;
   border-radius: 10px;
   background-color: #fff;
-  user-select: none;
 }
 
-/* スポット入力エリア */
-#spots > div {
-  margin-bottom: 2em;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-input[type="text"] {
-  font-size: 1.2em;
-  padding: 0.5em 1em;
-  width: 100%;
-  border: 2px solid #8f5e3c;
-  border-radius: 10px;
-  box-sizing: border-box;
-  margin-bottom: 0.6em;
-}
-
-button {
-  width: 100%;
-  font-size: 1.1em;
-  padding: 0.7em;
-  border: none;
-  border-radius: 8px;
-  background-color: #a6714e;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #8f5e3c;
-}
-
-/* 完了メッセージ */
+/* --------------------
+   成功表示
+--------------------- */
 #complete {
-  margin-top: 1em;
-  font-weight: bold;
+  text-align: center;
+  margin-top: 2em;
   color: #2a7a2e;
-  text-align: center;
-  font-size: 1.3em;
-  animation: fadeInUp 0.8s ease forwards;
-  animation-delay: 0.6s;
+  font-weight: bold;
 }
 
-/* ステータスメッセージ */
-#status {
-  text-align: center;
-  font-size: 1.2em;
-  margin-top: 1em;
-  color: #b33;
-}
-
-/* リンクボタン */
-a#surveyLink {
-  display: block;
+.link-btn {
   background: #6b4c3b;
   color: white;
-  text-decoration: none;
   text-align: center;
   padding: 0.7em;
-  margin: 0.5em auto;
+  display: block;
+  width: 90%;
   max-width: 400px;
+  margin: 1em auto;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
-a#surveyLink:hover {
-  background: #8a6146;
+.link-btn:hover {
+  background-color: #8a6146;
 }
 
-/* アニメーション */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* --------------------
+   ステータス
+--------------------- */
+#status {
+  text-align: center;
+  color: red;
+  margin-top: 1em;
+  font-weight: bold;
 }
 
-@media (min-width: 768px) {
+/* --------------------
+   レスポンシブ
+--------------------- */
+@media (min-width: 800px) {
   nav {
-    top: 55px;
+    top: 60px;
     right: 20px;
   }
-}
 
-
-/* スマホ対応 */
-@media (max-width: 450px) {
-  header {
-    padding: 0 0.8em;
+  .menu-toggle {
+    font-size: 2em;
   }
 
-  #title {
-    font-size: 1.1rem;
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  .card {
+    padding: 2em;
+  }
+}
+
+@media (max-width: 450px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 1.2em;
   }
 
   .char-box {
@@ -282,14 +242,5 @@ a#surveyLink:hover {
     height: 48px;
     font-size: 20px;
     line-height: 48px;
-  }
-
-  nav {
-    width: 70vw;
-  }
-
-  input[type="text"],
-  button {
-    font-size: 1em;
   }
 }
