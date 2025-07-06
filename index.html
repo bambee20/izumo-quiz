@@ -9,22 +9,28 @@
 </head>
 <body>
 
-  <!-- ヘッダー -->
   <header>
     <h1 id="title">出雲大社 クイズラリー</h1>
-    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く">☰</div>
-    <nav id="menu" class="hidden" aria-hidden="true">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="howtoplay.html">ゲームの遊び方</a></li>
-        <li><a href="map.html">スポットマップ</a></li>
-        <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
-      </ul>
-    </nav>
+    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
+  <nav id="menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
+      <li><a href="map.html">スポットマップ</a></li>
+      <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
+    </ul>
+  </nav>
+
+  <div id="overlay"></div>
+
   <main>
-    <div class="card">
+    <div>
       <p>5つのスポットを回ってキーワードを集めよう！</p>
 
       <h2>集めた文字</h2>
@@ -42,21 +48,25 @@
           <input type="text" id="pw1" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(1)">進む</button>
         </div>
+
         <div>
           <h2>スポット②</h2>
           <input type="text" id="pw2" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(2)">進む</button>
         </div>
+
         <div>
           <h2>スポット③</h2>
           <input type="text" id="pw3" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(3)">進む</button>
         </div>
+
         <div>
           <h2>スポット④</h2>
           <input type="text" id="pw4" placeholder="合言葉を入力" autocomplete="off" />
           <button onclick="checkPass(4)">進む</button>
         </div>
+
         <div>
           <h2>スポット⑤</h2>
           <input type="text" id="pw5" placeholder="合言葉を入力" autocomplete="off" />
@@ -66,69 +76,87 @@
 
       <div id="complete" style="display:none;">
         <h2>🎉 全部そろったよ！景品をもらおう！</h2>
-        <a href="https://docs.google.com/forms/..." target="_blank" class="link-btn">📝 アンケートに答える</a>
+        <a href="https://docs.google.com/forms/..." target="_blank">📝 アンケートに答える</a>
       </div>
 
       <p id="status"></p>
     </div>
   </main>
 
-  <script>
-    const targetWord = ["か", "ぐ", "ら", "で", "ん"];
-    const passwords = {
-      1: "かぐら",
-      2: "さんぱい",
-      3: "おおくにぬし",
-      4: "かみむかえ",
-      5: "しんもん"
-    };
-    const collectedChars = ["か", "ぐ", "ら", "で", "ん"];
-    const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
+<script>
+  const targetWord = ["か", "ぐ", "ら", "で", "ん"];
+  const passwords = {
+    1: "かぐら",
+    2: "さんぱい",
+    3: "おおくにぬし",
+    4: "かみむかえ",
+    5: "しんもん"
+  };
+  const collectedChars = ["か", "ぐ", "ら", "で", "ん"];
+  const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
 
-    function updateCollectedChars() {
-      for (let i = 0; i < collectedChars.length; i++) {
-        const el = document.getElementById("char" + (i + 1));
-        el.textContent = earned.includes(collectedChars[i]) ? collectedChars[i] : "？";
-      }
+  // 合言葉から取得済み文字を表示
+  function updateCollectedChars() {
+    for (let i = 0; i < collectedChars.length; i++) {
+      const el = document.getElementById("char" + (i + 1));
+      el.textContent = earned.includes(collectedChars[i]) ? collectedChars[i] : "？";
     }
+  }
 
-    function checkPass(num) {
-      const input = document.getElementById("pw" + num).value.trim().toLowerCase().normalize("NFC");
-      const correct = passwords[num];
-      const char = collectedChars[num - 1];
-
-      if (input === correct) {
-        if (!earned.includes(char)) {
-          earned.push(char);
-          localStorage.setItem("earnedChars", JSON.stringify(earned));
-        }
-        window.location.href = `spot${num}.html`;
-      } else {
-        document.getElementById("status").textContent = "パスワードが違います。";
-      }
-    }
-
-    // ニックネーム表示
-    const nickname = localStorage.getItem("nickname");
-    if (nickname) {
-      document.getElementById("title").textContent = `出雲大社　${nickname} のクイズラリー`;
-    }
-
-    // メニュー切替
-    const toggle = document.getElementById("menuToggle");
+  // ハンバーガーメニュー動作
+  function toggleMenu() {
+    const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById("menu");
-    toggle.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
-      menu.setAttribute("aria-hidden", menu.classList.contains("hidden"));
-    });
+    const overlay = document.getElementById("overlay");
 
-    // 完了チェック
-    updateCollectedChars();
-    if (targetWord.every(c => earned.includes(c))) {
-      document.getElementById("complete").style.display = "block";
-      document.getElementById("surveyLink").style.display = "block";
+    menuToggle.classList.toggle("open");
+    menu.classList.toggle("open");
+    overlay.classList.toggle("active");
+
+    const isOpen = menu.classList.contains("open");
+    menu.setAttribute("aria-hidden", !isOpen);
+    menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+  }
+
+  document.getElementById("menuToggle").addEventListener("click", toggleMenu);
+  document.getElementById("overlay").addEventListener("click", toggleMenu);
+
+  // ニックネーム取得してタイトルに表示
+  const nickname = localStorage.getItem("nickname");
+  if (nickname) {
+    document.getElementById("title").textContent = `出雲大社　${nickname} のクイズラリー`;
+  }
+
+  // 表示の更新
+  updateCollectedChars();
+
+  // 全問クリア済みなら達成メッセージとアンケートリンク表示
+  if (targetWord.every(c => earned.includes(c))) {
+    document.getElementById("complete").style.display = "block";
+    document.getElementById("surveyLink").style.display = "block";
+  }
+
+  // 合言葉チェック
+  function checkPass(spotNumber) {
+    const input = document.getElementById("pw" + spotNumber).value.trim().toLowerCase().normalize("NFC");
+    const answer = passwords[spotNumber];
+    const char = collectedChars[spotNumber - 1];
+    const statusEl = document.getElementById("status");
+
+    if (input === answer) {
+      if (!earned.includes(char)) {
+        earned.push(char);
+        localStorage.setItem("earnedChars", JSON.stringify(earned));
+      }
+      window.location.href = `spot${spotNumber}.html`;
+    } else {
+      statusEl.textContent = "合言葉が違います。もう一度入力してください。";
     }
-  </script>
+  }
+
+  // グローバルで使用できるように関数を公開
+  window.checkPass = checkPass;
+</script>
 
 </body>
 </html>
