@@ -95,7 +95,6 @@
   const collectedChars = ["か", "ぐ", "ら", "で", "ん"];
   const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
 
-  // 合言葉から取得済み文字を表示
   function updateCollectedChars() {
     for (let i = 0; i < collectedChars.length; i++) {
       const el = document.getElementById("char" + (i + 1));
@@ -103,7 +102,6 @@
     }
   }
 
-  // ハンバーガーメニュー動作
   function toggleMenu() {
     const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById("menu");
@@ -121,23 +119,18 @@
   document.getElementById("menuToggle").addEventListener("click", toggleMenu);
   document.getElementById("overlay").addEventListener("click", toggleMenu);
 
-
-  // ニックネーム取得してタイトルに表示
   const nickname = localStorage.getItem("nickname");
   if (nickname) {
     document.getElementById("title").textContent = `出雲大社　${nickname} のクイズラリー`;
   }
 
-  // 表示の更新
   updateCollectedChars();
 
-  // 全問クリア済みなら達成メッセージとアンケートリンク表示
   if (targetWord.every(c => earned.includes(c))) {
     document.getElementById("complete").style.display = "block";
     document.getElementById("surveyLink").style.display = "block";
   }
 
-  // 合言葉チェック
   function checkPass(spotNumber) {
     const input = document.getElementById("pw" + spotNumber).value.trim().toLowerCase().normalize("NFC");
     const answer = passwords[spotNumber];
@@ -155,7 +148,6 @@
     }
   }
 
-  // グローバルで使用できるように関数を公開
   window.checkPass = checkPass;
 </script>
 
