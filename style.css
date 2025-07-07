@@ -38,9 +38,8 @@ header {
   background: #fff4ea;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: nowrap;
-  padding: 0 1em;
   border-bottom: 2px solid #8f5e3c;
   z-index: 1000;
 }
