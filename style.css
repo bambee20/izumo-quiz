@@ -4,6 +4,7 @@ body {
   background: #fef9f5;
   color: #333;
   padding-top: 70px;
+  text-align: center;
 }
 
 header {
@@ -17,6 +18,7 @@ header {
   align-items: center;
   z-index: 1000;
   border-bottom: 2px solid #8f5e3c;
+  box-sizing: border-box;
 }
 
 .menu-toggle {
@@ -63,6 +65,7 @@ nav {
   transform: translateY(-10px);
   transition: all 0.3s ease;
   z-index: 1050;
+  box-sizing: border-box;
 }
 
 nav.open {
@@ -112,7 +115,6 @@ nav a:hover {
   display: block;
 }
 
-/* その他スタイルは以前のままでOK */
 .char-box {
   width: 60px;
   height: 60px;
@@ -141,6 +143,7 @@ input[type="text"] {
   display: block;
   border: 2px solid #8f5e3c;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 button {
