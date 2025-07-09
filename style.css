@@ -1,215 +1,346 @@
 /* 全体共通設定 */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  background-color: #fff8f0;
-  color: #4b2e1e;
+  margin: 0;
+  padding: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: #fff8f0;
+  color: #4b2e1e;
 }
 
 /* ヘッダー */
 header {
-  background-color: #fff4e1;
-  padding: 10px 20px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  border-bottom: 2px solid #e0c8a0;
+  background-color: #fff4e1;
+  padding: 10px 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  border-bottom: 2px solid #e0c8a0;
 }
 
 header h1 {
-  font-size: 1.4rem;
-  margin: 0;
-  text-align: center;
+  font-size: 1.4rem;
+  margin: 0;
+  text-align: center;
 }
 
 /* ハンバーガーメニュー */
 .menu-toggle {
-  position: absolute;
-  top: 12px;
-  right: 20px;
-  cursor: pointer;
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .menu-toggle span {
-  display: block;
-  width: 28px;
-  height: 3px;
-  background-color: #6b4c3b;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: #6b4c3b;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 .menu-toggle.open span:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
+  transform: rotate(45deg) translateY(8px);
 }
 .menu-toggle.open span:nth-child(2) {
-  opacity: 0;
+  opacity: 0;
 }
 .menu-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
+  transform: rotate(-45deg) translateY(-8px);
 }
 
 /* ナビゲーションメニュー */
 #menu {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 220px;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-  transition: left 0.4s ease;
-  z-index: 1000;
-  padding-top: 70px;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 220px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  transition: left 0.4s ease;
+  z-index: 1000;
+  padding-top: 70px;
 }
 
 #menu.open {
-  left: 0;
+  left: 0;
 }
 
 #menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 #menu li a {
-  display: block;
-  padding: 15px 20px;
-  color: #4b2e1e;
-  text-decoration: none;
-  font-weight: bold;
-  border-bottom: 1px solid #eee2d0;
-  transition: background-color 0.3s ease;
+  display: block;
+  padding: 15px 20px;
+  color: #4b2e1e;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px solid #eee2d0;
+  transition: background-color 0.3s ease;
 }
 
 #menu li a:hover {
-  background-color: #fdf3e7;
+  background-color: #fdf3e7;
 }
+
+/* 現在のページを示すメニューリンク */
+#menu li a.active {
+    background-color: #fdf3e7; /* 現在のページの背景色 */
+    color: #b6894c; /* 色を少し変える */
+    cursor: default; /* クリック不可に */
+}
+
 
 /* オーバーレイ */
 #overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  width: 100%;
-  height: 100%;
-  display: none;
-  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 999;
 }
 
 #overlay.active {
-  display: block;
+  display: block;
 }
 
 /* メイン */
 main {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 main h1 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 1em;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 /* カードスタイル */
 .card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
-  line-height: 1.6;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
+  line-height: 1.6;
 }
 
 /* 入力・ボタンエリア */
 input[type="text"] {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  margin-bottom: 8px;
-  border: 2px solid #dab48a;
-  border-radius: 6px;
-  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 2px solid #dab48a;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 button {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  background-color: #f0b35a;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  background-color: #f0b35a;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #e49d3b;
+  background-color: #e49d3b;
 }
 
 /* 文字ボックス */
 .box-container {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .char-box {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #b6894c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-  border-radius: 8px;
-  background-color: #fff;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #b6894c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* スポットごとのスタイル */
+#spots > div {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px; /* 各スポット間の余白 */
+    border: 2px solid #dab48a; /* デフォルトのボーダー */
+    transition: all 0.3s ease; /* 変化を滑らかに */
+    text-align: center; /* h2, input, button を中央寄せに */
+}
+
+/* 完了したスポットのスタイル */
+#spots > div.completed {
+    background-color: #e6ffe6; /* 薄い緑色 */
+    border-color: #6aaa5a; /* 緑色のボーダー */
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1); /* 少し影を濃く */
+}
+
+#spots > div.completed h2 {
+    color: #4b8a4a; /* タイトルの色も変更 */
+}
+
+#spots > div.completed h2::after {
+    content: ' ✅'; /* タイトルの横にチェックマーク */
+    color: #4b8a4a;
+    font-size: 1em; /* サイズ調整 */
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* 完了した入力欄とボタンのスタイル */
+#spots > div.completed input[type="text"] {
+    background-color: #f0f0f0; /* 入力欄の背景色をグレーに */
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+#spots > div.completed button {
+    background-color: #a0a0a0; /* ボタンの色をグレーに */
+    cursor: not-allowed;
+}
+
+#spots > div.completed button:hover {
+    background-color: #909090; /* ホバー時の色も変更 */
 }
 
 /* 完成メッセージ */
 #complete {
-  background-color: #eaffd0;
-  border: 2px dashed #8dcf54;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 12px;
-  text-align: center;
+  background-color: #eaffd0;
+  border: 2px dashed #8dcf54;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  text-align: center;
 }
 
+/* ステータスメッセージ */
 #status {
-  margin-top: 20px;
-  font-weight: bold;
-  color: #d15353;
-  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #d15353; /* 赤色 */
+  background-color: #ffe6e6; /* 薄い赤色の背景 */
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #d15353;
+  text-align: center;
+  display: inline-block; /* 内容に合わせて幅を調整 */
+  max-width: fit-content; /* 最大幅を内容に合わせる */
+  margin-left: auto; /* 中央寄せ */
+  margin-right: auto; /* 中央寄せ */
 }
+
+/* ニックネーム入力ページ用 */
+body.nickname-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 画面中央に配置 */
+    background-color: #fff8f0;
+}
+
+body.nickname-page main {
+    padding: 20px;
+    max-width: 400px; /* 入力エリアの最大幅 */
+    width: 90%; /* レスポンシブ対応 */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.nickname-label {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #4b2e1e;
+}
+
+.nickname-input {
+    width: calc(100% - 20px); /* paddingを考慮 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #dab48a;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    text-align: center; /* 入力文字も中央寄せに */
+}
+
+.nickname-input::placeholder {
+    color: #a0a0a0;
+}
+
+.error-message {
+    color: #d15353; /* 赤色 */
+    font-size: 0.9em;
+    margin-top: 5px;
+    text-align: center;
+    min-height: 1.2em; /* メッセージがないときも高さが崩れないように */
+}
+
+
+/* Googleマップリンクボタンのスタイル */
+.link-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #f0b35a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.link-btn:hover {
+    background-color: #e49d3b;
+}
+
 
 /* レスポンシブ */
 @media (min-width: 768px) {
-  .box-container {
-    justify-content: center;
-  }
+  .box-container {
+    justify-content: center;
+  }
 
-  header {
-    justify-content: space-between;
-    padding: 10px 40px;
-  }
+  header {
+    justify-content: space-between;
+    padding: 10px 40px;
+  }
 
-  main {
-    padding: 40px;
-  }
+  main {
+    padding: 40px;
+  }
 }
