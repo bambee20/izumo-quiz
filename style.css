@@ -1,83 +1,73 @@
-/* 共通設定 */
+/* 全体共通設定 */
 body {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  background-color: #fef9f5;
-  color: #333;
   margin: 0;
-  padding-top: 80px;
-}
-
-h1, h2 {
-  color: #6b4c3b;
-  text-align: center;
-}
-
-p {
-  text-align: center;
-  font-size: 14px;
+  padding: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: #fff8f0;
+  color: #4b2e1e;
 }
 
 /* ヘッダー */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff4ea;
-  border-bottom: 2px solid #8f5e3c;
-  z-index: 1000;
-  height: 60px;
+  background-color: #fff4e1;
+  padding: 10px 20px;
+  position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 1em;
-  box-sizing: border-box;
+  height: 60px;
+  border-bottom: 2px solid #e0c8a0;
+}
+
+header h1 {
+  font-size: 1.4rem;
+  margin: 0;
+  text-align: center;
 }
 
 /* ハンバーガーメニュー */
 .menu-toggle {
-  width: 30px;
-  height: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  position: absolute;
+  top: 12px;
+  right: 20px;
   cursor: pointer;
   z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .menu-toggle span {
   display: block;
-  height: 4px;
+  width: 28px;
+  height: 3px;
   background-color: #6b4c3b;
   border-radius: 2px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .menu-toggle.open span:nth-child(1) {
-  transform: rotate(45deg) translateY(10px);
+  transform: rotate(45deg) translateY(8px);
 }
-
 .menu-toggle.open span:nth-child(2) {
   opacity: 0;
 }
-
 .menu-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-10px);
+  transform: rotate(-45deg) translateY(-8px);
 }
 
-/* メニュー */
+/* ナビゲーションメニュー */
 #menu {
   position: fixed;
   top: 0;
   left: -250px;
   width: 220px;
-  height: 100vh;
+  height: 100%;
   background-color: #fff;
-  border-right: 2px solid #8f5e3c;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
   transition: left 0.4s ease;
-  padding-top: 70px;
   z-index: 1000;
+  padding-top: 70px;
 }
 
 #menu.open {
@@ -90,177 +80,136 @@ header {
   margin: 0;
 }
 
-#menu li {
-  border-bottom: 1px solid #eee;
-}
-
-#menu a {
+#menu li a {
   display: block;
   padding: 15px 20px;
+  color: #4b2e1e;
   text-decoration: none;
-  color: #6b4c3b;
   font-weight: bold;
-  transition: background-color 0.3s;
+  border-bottom: 1px solid #eee2d0;
+  transition: background-color 0.3s ease;
 }
 
-#menu a:hover {
-  background-color: #f7ede3;
+#menu li a:hover {
+  background-color: #fdf3e7;
 }
 
-/* オーバーレイ（メニュー開いた時の背景） */
+/* オーバーレイ */
 #overlay {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.4);
-  width: 100vw;
-  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: none;
   z-index: 999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
 }
 
 #overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+  display: block;
 }
 
-/* カード（説明など） */
+/* メイン */
+main {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+main h1 {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+/* カードスタイル */
 .card {
-  background: #fff;
+  background-color: #fff;
+  padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 1.5em;
-  margin: 1em auto;
-  max-width: 600px;
-  animation: fadeInUp 0.5s ease both;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
+  line-height: 1.6;
+}
+
+/* 入力・ボタンエリア */
+input[type="text"] {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 2px solid #dab48a;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 button {
-  display: block;
-  font-size: 1.1em;
-  padding: 0.7em;
-  margin: 1em auto;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  background-color: #f0b35a;
   border: none;
-  border-radius: 8px;
-  background-color: #a6714e;
-  color: white;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s ease;
-  animation: fadeInUp 0.5s ease both;
-  width: 80%;
-  max-width: 400px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #925a3a;
+  background-color: #e49d3b;
 }
 
-button:active {
-  transform: scale(0.95);
-}
-
-/* 入力欄 */
-input[type="text"],
-input[type="password"],
-.nickname-input {
-  font-size: 1.2em;
-  padding: 0.6em 1em;
-  width: 80%;
-  max-width: 400px;
-  margin: 1em auto;
-  display: block;
-  border: 2px solid #8f5e3c;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  animation: fadeInUp 0.5s ease both;
-}
-
-/* 文字ボックス（index.html用） */
+/* 文字ボックス */
 .box-container {
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  margin-top: 2em;
+  justify-content: space-around;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .char-box {
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
-  line-height: 60px;
-  text-align: center;
-  border: 2px solid #6b4c3b;
-  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #b6894c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  border-radius: 8px;
   background-color: #fff;
-  opacity: 0;
-  animation: popIn 0.5s ease forwards;
 }
 
-#char1 { animation-delay: 0.1s; }
-#char2 { animation-delay: 0.2s; }
-#char3 { animation-delay: 0.3s; }
-#char4 { animation-delay: 0.4s; }
-#char5 { animation-delay: 0.5s; }
-
-/* クイズ達成 */
+/* 完成メッセージ */
 #complete {
-  margin-top: 1em;
-  font-weight: bold;
-  color: #2a7a2e;
+  background-color: #eaffd0;
+  border: 2px dashed #8dcf54;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
   text-align: center;
-  font-size: 1.3em;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease forwards;
-  animation-delay: 0.6s;
 }
 
-/* アニメーション */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+#status {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #d15353;
+  text-align: center;
 }
 
-@keyframes popIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 20px;
+/* レスポンシブ */
+@media (min-width: 768px) {
+  .box-container {
+    justify-content: center;
   }
 
-  button {
-    font-size: 16px;
+  header {
+    justify-content: space-between;
+    padding: 10px 40px;
   }
 
-  .card {
-    padding: 1em;
-    font-size: 14px;
-  }
-
-  .char-box {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    line-height: 50px;
+  main {
+    padding: 40px;
   }
 }
