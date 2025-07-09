@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ニックネームを入力</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>ニックネームを入力</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main>
-    <h1 class="nickname-label">ニックネームを入力してね</h1>
+  <main>
+    <h1 class="nickname-label">ニックネームを入力してね</h1>
 
-    <div class="nickname-container">
-      <input type="text" id="nicknameInput" class="nickname-input" placeholder="ニックネーム">
-      <button id="startButton">スタート！</button>
-    </div>
-<!-- nickname.html の末尾 -->
-</main>
+    <div class="nickname-container">
+      <input type="text" id="nicknameInput" class="nickname-input" placeholder="ニックネーム" maxlength="10">
+      <p id="errorMessage" class="error-message"></p>       <button id="startButton">スタート！</button>
+    </div>
+  </main>
 
 <script>
-  document.getElementById("startButton").addEventListener("click", () => {
-    const name = document.getElementById("nicknameInput").value.trim();
-    if (name) {
-      localStorage.setItem("nickname", name);
-      window.location.href = "howtoplay.html";
-    } else {
-      alert("ニックネームを入力してください！");
-    }
-  });
+  document.getElementById("startButton").addEventListener("click", () => {
+    const name = document.getElementById("nicknameInput").value.trim();
+    const errorMessage = document.getElementById("errorMessage");
+
+    if (name) {
+      localStorage.setItem("nickname", name);
+      window.location.href = "howtoplay.html"; // 遊び方ページへ遷移
+    } else {
+      errorMessage.textContent = "ニックネームを入力してください！";
+    }
+  });
+
+  // Enterキーでスタート
+  document.getElementById("nicknameInput").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      document.getElementById("startButton").click();
+    }
+  });
+
+  // ページロード時にニックネームが既に存在する場合の処理
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedNickname = localStorage.getItem("nickname");
+    const nicknameInput = document.getElementById("nicknameInput");
+    if (storedNickname) {
+      nicknameInput.value = storedNickname;
+    }
+  });
 </script>
 
 </body>
 </html>
-
