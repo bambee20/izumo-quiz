@@ -1,55 +1,106 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>スポットマップ - 出雲大社クイズラリー</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>スポットマップ - 出雲大社クイズラリー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header>
-    <div class="menu-toggle" id="menu-toggle">☰</div>
-    <nav id="menu" class="hidden">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="howtoplay.html">ゲームの遊び方</a></li>
-        <li><a href="map.html">スポットマップ</a></li>
-      </ul>
-    </nav>
-  </header>
+  <header>
+    <h1 id="title">出雲大社 クイズラリー</h1>
+    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
 
-  <main>
-    <h1>スポットマップ</h1>
-    <div class="card">
-      <p>以下の地図を参考にして、5つのスポットを探してみよう！</p>
-      
-      <!-- Googleマップへのリンク（仮URL） -->
-      <a href="https://goo.gl/maps/xxxxx" target="_blank" class="link-btn">🗺️ Googleマップを開く</a>
+  <nav id="menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
+      <li><a href="map.html">スポットマップ</a></li>
+      <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
+      <li><a href="#" id="resetGame">🔄 ゲームをリセットする</a></li>     </ul>
+  </nav>
 
-      <!-- 地図埋め込み（任意） -->
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.833935166748!2d132.7541308!3d35.2070494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355700f655555555%3A0xaaaaaaaaaaaaaaa!2z5pel5pys6YO95aSn5a2m!5e0!3m2!1sja!2sjp!4v0000000000000" 
-        width="100%" height="400" style="border:0; border-radius:12px; margin-top: 1em;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-  </main>
+  <div id="overlay"></div>
+
+  <main>
+    <h1>スポットマップ</h1>
+    <div class="card">
+      <p>以下の地図を参考にして、5つのスポットを探してみよう！</p>
+      
+            <a href="https://www.google.com/maps/place/%E5%87%BA%E9%9B%B2%E5%A4%A7%E7%A4%BE/@35.3941441,132.6841773,17z/data=!3m1!4b1!4m6!3m5!1s0x3558d1976a44f9c3:0x1b70d740c02c6109!8m2!3d35.3941441!4d132.6867522!16zCgVsZWdvcHk?entry=ttu" target="_blank" class="link-btn">🗺️ Googleマップを開く</a>
+
+            <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3221.751307616194!2d132.6841773!3d35.3941441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3558d1976a44f9c3%3A0x1b70d740c02c6109!2z5 outOOiQh-Wgt-S4reWjsA!5e0!3m2!1sja!2sjp!4v1678886400000!5m2!1sja!2sjp" 
+        width="100%" height="400" style="border:0; border-radius:12px; margin-top: 1em;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </main>
 
 <script>
-  // ハンバーガーメニュー動作
-  const toggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("menu");
+    // ニックネーム取得してタイトルに表示
+    const nickname = localStorage.getItem("nickname");
+    if (nickname) {
+        document.getElementById("title").textContent = `出雲大社 ${nickname} のクイズラリー`;
+    } else {
+        document.getElementById("title").textContent = `出雲大社 クイズラリー`;
+    }
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
+    // ハンバーガーメニュー動作 (共通関数)
+    function toggleMenu() {
+      const menuToggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('menu');
+      const overlay = document.getElementById('overlay');
 
-  document.querySelectorAll("#menu a").forEach(link => {
-    link.addEventListener("click", () => {
-      menu.classList.add("hidden");
+      menuToggle.classList.toggle('open');
+      menu.classList.toggle('open');
+      overlay.classList.toggle('active');
+
+      const isOpen = menu.classList.contains('open');
+      menu.setAttribute('aria-hidden', !isOpen);
+      menuToggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    }
+
+    document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+    document.getElementById('overlay').addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('open');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('menuToggle').classList.remove('open');
+        document.getElementById('menu').setAttribute('aria-hidden', true);
+      });
     });
-  });
+
+    // 現在のページメニューをアクティブにする
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname.split('/').pop();
+        document.querySelectorAll('#menu a').forEach(link => {
+            const linkPath = link.href.split('/').pop();
+            if (currentPath === linkPath) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+    });
+
+    // ゲームリセット機能
+    document.getElementById('resetGame').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (confirm('本当にゲームの進行状況をリセットしますか？集めた文字やニックネームが消えます。')) {
+            localStorage.removeItem("earnedChars");
+            localStorage.removeItem("nickname");
+            location.reload(); // ページをリロードして初期状態に戻す
+        }
+    });
 </script>
 
 </body>
+</html>
