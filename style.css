@@ -1,23 +1,171 @@
-/* 和風＋ポップなスタイル */
+/* 共通設定 */
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  background: linear-gradient(to bottom, #fffaf5, #f8eee6);
+  background-color: #fef9f5;
   color: #333;
+  margin: 0;
   padding-top: 80px;
+}
+
+h1, h2 {
+  color: #6b4c3b;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ヘッダー */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff4ea;
+  border-bottom: 2px solid #8f5e3c;
+  z-index: 1000;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+  box-sizing: border-box;
+}
+
+/* ハンバーガーメニュー */
+.menu-toggle {
+  width: 30px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  background-color: #6b4c3b;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* メニュー */
+#menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 220px;
+  height: 100vh;
+  background-color: #fff;
+  border-right: 2px solid #8f5e3c;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  transition: left 0.4s ease;
+  padding-top: 70px;
+  z-index: 1000;
+}
+
+#menu.open {
+  left: 0;
+}
+
+#menu ul {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-/* タイトル登場アニメーション */
-#title {
-  text-align: center;
-  font-size: 1.8em;
-  color: #6b4c3b;
-  animation: popZoom 1s ease-in-out;
+#menu li {
+  border-bottom: 1px solid #eee;
 }
 
-/* 合言葉・ニックネーム入力 */
-input[type="text"] {
-  font-size: 1.5em;
+#menu a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #6b4c3b;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#menu a:hover {
+  background-color: #f7ede3;
+}
+
+/* オーバーレイ（メニュー開いた時の背景） */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* カード（説明など） */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1.5em;
+  margin: 1em auto;
+  max-width: 600px;
+  animation: fadeInUp 0.5s ease both;
+}
+
+button {
+  display: block;
+  font-size: 1.1em;
+  padding: 0.7em;
+  margin: 1em auto;
+  border: none;
+  border-radius: 8px;
+  background-color: #a6714e;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  animation: fadeInUp 0.5s ease both;
+  width: 80%;
+  max-width: 400px;
+}
+
+button:hover {
+  background-color: #925a3a;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* 入力欄 */
+input[type="text"],
+input[type="password"],
+.nickname-input {
+  font-size: 1.2em;
   padding: 0.6em 1em;
   width: 80%;
   max-width: 400px;
@@ -29,38 +177,14 @@ input[type="text"] {
   animation: fadeInUp 0.5s ease both;
 }
 
-/* ボタン */
-button {
-  display: block;
-  width: 80%;
-  max-width: 400px;
-  font-size: 1.1em;
-  margin: 0 auto 1.5em;
-  padding: 0.7em;
-  border: none;
-  border-radius: 8px;
-  background-color: #a6714e;
-  color: white;
-  cursor: pointer;
-  animation: fadeInUp 0.6s ease both;
-  transition: transform 0.2s ease, background 0.3s;
-}
-
-button:hover {
-  background-color: #8c5737;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-/* 集めた文字ボックス */
+/* 文字ボックス（index.html用） */
 .box-container {
   display: flex;
   justify-content: center;
   gap: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   margin-top: 2em;
-  flex-wrap: wrap;
 }
 
 .char-box {
@@ -72,7 +196,8 @@ button:active {
   border: 2px solid #6b4c3b;
   border-radius: 10px;
   background-color: #fff;
-  animation: bounceIn 0.6s ease forwards;
+  opacity: 0;
+  animation: popIn 0.5s ease forwards;
 }
 
 #char1 { animation-delay: 0.1s; }
@@ -81,144 +206,61 @@ button:active {
 #char4 { animation-delay: 0.4s; }
 #char5 { animation-delay: 0.5s; }
 
-/* 達成メッセージ */
+/* クイズ達成 */
 #complete {
-  margin-top: 1.5em;
+  margin-top: 1em;
   font-weight: bold;
   color: #2a7a2e;
   text-align: center;
-  font-size: 1.4em;
-  animation: rubberBand 1.5s ease-in-out infinite alternate;
+  font-size: 1.3em;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.6s;
 }
-
-/* ナビゲーション（左からスライド） */
-.menu {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100%;
-  background-color: #fff4ea;
-  border-right: 2px solid #8f5e3c;
-  transition: left 0.4s ease;
-  z-index: 1000;
-  padding-top: 70px;
-}
-
-.menu.open {
-  left: 0;
-}
-
-.menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu li a {
-  display: block;
-  padding: 14px 20px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #6b4c3b;
-  border-bottom: 1px solid #e1cdbb;
-}
-
-.menu li a:hover {
-  background-color: #f3e3d2;
-}
-
-/* ハンバーガーボタン */
-.menu-toggle {
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  font-size: 2em;
-  color: #6b4c3b;
-  cursor: pointer;
-  z-index: 1100;
-}
-
-.nickname-label {
-  text-align: center;
-  font-size: 1.2em;
-  margin-top: 1em;
-}
-
-.nickname-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2em;
-}
-
-.nickname-input {
-  font-size: 1.5em;
-  padding: 0.6em 1em;
-  width: 80%;
-  max-width: 400px;
-  margin-bottom: 1em;
-  border: 2px solid #8f5e3c;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  animation: fadeInUp 0.5s ease both;
-}
-
-
-
-#startButton {
-  width: 80%;
-  max-width: 400px;
-  font-size: 1.1em;
-  padding: 0.7em;
-  background-color: #a6714e;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  animation: fadeInUp 0.6s ease both;
-  transition: transform 0.2s ease, background 0.3s;
-}
-
-#startButton:hover {
-  background-color: #8c5737;
-}
-
-#startButton:active {
-  transform: scale(0.95);
-}
-
-
-
-
 
 /* アニメーション */
-@keyframes popZoom {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes bounceIn {
-  0% { transform: scale(0.3); opacity: 0; }
-  50% { transform: scale(1.1); }
-  70% { transform: scale(0.9); }
-  100% { transform: scale(1); opacity: 1; }
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-@keyframes rubberBand {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 20px;
+  }
 
-/* レスポンシブ */
-@media (min-width: 768px) {
-  .box-container {
-    flex-wrap: nowrap;
+  button {
+    font-size: 16px;
+  }
+
+  .card {
+    padding: 1em;
+    font-size: 14px;
+  }
+
+  .char-box {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
   }
 }
