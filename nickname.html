@@ -8,12 +8,13 @@
 </head>
 <body>
   <main>
-    <div class="card">
-      <h1>ニックネームを入力しよう</h1>
-      <input type="text" id="nickname" placeholder="ニックネームを入力" class="nickname-input">
-      <button onclick="saveNickname()">スタート</button>
+    <h1>ニックネームを入力してね</h1>
+    <div class="nickname-container">
+      <input type="text" id="nicknameInput" class="nickname-input" placeholder="ニックネーム">
+      <button id="startButton">スタート！</button>
     </div>
   </main>
+
 
 <script>
   function saveNickname() {
