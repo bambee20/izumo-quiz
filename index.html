@@ -11,10 +11,14 @@
 
   <header>
     <h1 id="title">出雲大社 クイズラリー</h1>
-    <div class="menu-toggle" id="menuToggle">☰</div>
+    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
-  <nav id="menu" class="menu hidden">
+  <nav id="menu" aria-hidden="true">
     <ul>
       <li><a href="index.html">ホーム</a></li>
       <li><a href="howtoplay.html">ゲームの遊び方</a></li>
@@ -23,52 +27,60 @@
     </ul>
   </nav>
 
+  <div id="overlay"></div>
+
   <main>
-    <p class="intro">5つのスポットを回ってキーワードを集めよう！</p>
+    <div>
+      <p>5つのスポットを回ってキーワードを集めよう！</p>
 
-    <h2>集めた文字</h2>
-    <div class="box-container">
-      <div class="char-box" id="char1">？</div>
-      <div class="char-box" id="char2">？</div>
-      <div class="char-box" id="char3">？</div>
-      <div class="char-box" id="char4">？</div>
-      <div class="char-box" id="char5">？</div>
+      <h2>集めた文字</h2>
+      <div class="box-container">
+        <div class="char-box" id="char1">？</div>
+        <div class="char-box" id="char2">？</div>
+        <div class="char-box" id="char3">？</div>
+        <div class="char-box" id="char4">？</div>
+        <div class="char-box" id="char5">？</div>
+      </div>
+
+      <div id="spots">
+        <div>
+          <h2>スポット①</h2>
+          <input type="text" id="pw1" placeholder="合言葉を入力" autocomplete="off" />
+          <button onclick="checkPass(1)">進む</button>
+        </div>
+
+        <div>
+          <h2>スポット②</h2>
+          <input type="text" id="pw2" placeholder="合言葉を入力" autocomplete="off" />
+          <button onclick="checkPass(2)">進む</button>
+        </div>
+
+        <div>
+          <h2>スポット③</h2>
+          <input type="text" id="pw3" placeholder="合言葉を入力" autocomplete="off" />
+          <button onclick="checkPass(3)">進む</button>
+        </div>
+
+        <div>
+          <h2>スポット④</h2>
+          <input type="text" id="pw4" placeholder="合言葉を入力" autocomplete="off" />
+          <button onclick="checkPass(4)">進む</button>
+        </div>
+
+        <div>
+          <h2>スポット⑤</h2>
+          <input type="text" id="pw5" placeholder="合言葉を入力" autocomplete="off" />
+          <button onclick="checkPass(5)">進む</button>
+        </div>
+      </div>
+
+      <div id="complete" style="display:none;">
+        <h2>🎉 全部そろったよ！景品をもらおう！</h2>
+        <a href="https://docs.google.com/forms/..." target="_blank">📝 アンケートに答える</a>
+      </div>
+
+      <p id="status"></p>
     </div>
-
-    <div id="spots">
-      <div class="spot">
-        <h2>スポット①</h2>
-        <input type="text" id="pw1" placeholder="合言葉を入力" />
-        <button onclick="checkPass(1)">進む</button>
-      </div>
-      <div class="spot">
-        <h2>スポット②</h2>
-        <input type="text" id="pw2" placeholder="合言葉を入力" />
-        <button onclick="checkPass(2)">進む</button>
-      </div>
-      <div class="spot">
-        <h2>スポット③</h2>
-        <input type="text" id="pw3" placeholder="合言葉を入力" />
-        <button onclick="checkPass(3)">進む</button>
-      </div>
-      <div class="spot">
-        <h2>スポット④</h2>
-        <input type="text" id="pw4" placeholder="合言葉を入力" />
-        <button onclick="checkPass(4)">進む</button>
-      </div>
-      <div class="spot">
-        <h2>スポット⑤</h2>
-        <input type="text" id="pw5" placeholder="合言葉を入力" />
-        <button onclick="checkPass(5)">進む</button>
-      </div>
-    </div>
-
-    <div id="complete" style="display:none;">
-      <h2>🎉 全部そろったよ！景品をもらおう！</h2>
-      <a href="https://docs.google.com/forms/..." target="_blank" class="link-btn">📝 アンケートに答える</a>
-    </div>
-
-    <p id="status"></p>
   </main>
 
   <script>
@@ -80,49 +92,74 @@
       4: "かみむかえ",
       5: "しんもん"
     };
-    const collectedChars = [...targetWord];
+    const collectedChars = ["か", "ぐ", "ら", "で", "ん"];
     const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
 
     function updateCollectedChars() {
-      collectedChars.forEach((char, i) => {
-        document.getElementById("char" + (i + 1)).textContent = earned.includes(char) ? char : "？";
-      });
-    }
-
-    function checkPass(num) {
-      const input = document.getElementById("pw" + num).value.trim().toLowerCase();
-      const correct = passwords[num];
-      const char = collectedChars[num - 1];
-      const status = document.getElementById("status");
-
-      if (input === correct) {
-        if (!earned.includes(char)) {
-          earned.push(char);
-          localStorage.setItem("earnedChars", JSON.stringify(earned));
-        }
-        window.location.href = `spot${num}.html`;
-      } else {
-        status.textContent = "合言葉が違います。もう一度入力してください。";
+      for (let i = 0; i < collectedChars.length; i++) {
+        const el = document.getElementById("char" + (i + 1));
+        el.textContent = earned.includes(collectedChars[i]) ? collectedChars[i] : "？";
       }
     }
 
-    // ニックネーム表示
-    const nickname = localStorage.getItem("nickname");
-    if (nickname) {
-      document.getElementById("title").textContent = `出雲大社 ${nickname} のクイズラリー`;
+    // ハンバーガーメニュー動作
+    function toggleMenu() {
+      const menuToggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('menu');
+      const overlay = document.getElementById('overlay');
+
+      menuToggle.classList.toggle('open');
+      menu.classList.toggle('open');
+      overlay.classList.toggle('active');
+
+      const isOpen = menu.classList.contains('open');
+      menu.setAttribute('aria-hidden', !isOpen);
+      menuToggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
     }
 
-    // 初期表示
+    document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+    document.getElementById('overlay').addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('open');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('menuToggle').classList.remove('open');
+        document.getElementById('menu').setAttribute('aria-hidden', true);
+      });
+    });
+
+    // ニックネーム取得してタイトルに表示
+    const nickname = localStorage.getItem("nickname");
+    if (nickname) {
+      document.getElementById("title").textContent = `出雲大社　${nickname} のクイズラリー`;
+    }
+
     updateCollectedChars();
+
     if (targetWord.every(c => earned.includes(c))) {
       document.getElementById("complete").style.display = "block";
       document.getElementById("surveyLink").style.display = "block";
     }
 
-    // ハンバーガーメニュー動作
-document.getElementById("menuToggle").addEventListener("click", () => {
-  document.getElementById("menu").classList.toggle("open");
-    });
+    function checkPass(spotNumber) {
+      const input = document.getElementById("pw" + spotNumber).value.trim().toLowerCase().normalize("NFC");
+      const answer = passwords[spotNumber];
+      const char = collectedChars[spotNumber - 1];
+      const statusEl = document.getElementById("status");
+
+      if (input === answer) {
+        if (!earned.includes(char)) {
+          earned.push(char);
+          localStorage.setItem("earnedChars", JSON.stringify(earned));
+        }
+        window.location.href = `spot${spotNumber}.html`;
+      } else {
+        statusEl.textContent = "合言葉が違います。もう一度入力してください。";
+      }
+    }
+
+    window.checkPass = checkPass;
   </script>
 
 </body>
