@@ -179,6 +179,12 @@ button:active {
 #startButton:active {
   transform: scale(0.95);
 }
+.nickname-label {
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 1em;
+}
+
 
 
 /* アニメーション */
