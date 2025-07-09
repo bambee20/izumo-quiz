@@ -1,82 +1,109 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>遊び方 - 出雲大社クイズラリー</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>遊び方 - 出雲大社クイズラリー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header>
-    <h1 id="title">出雲大社 クイズラリー</h1>
-    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
+  <header>
+    <h1 id="title">出雲大社 クイズラリー</h1>
+    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
 
-  <nav id="menu" aria-hidden="true">
-    <ul>
-      <li><a href="index.html">ホーム</a></li>
-      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
-      <li><a href="map.html">スポットマップ</a></li>
-    </ul>
-  </nav>
+  <nav id="menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
+      <li><a href="map.html">スポットマップ</a></li>
+      <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
+      <li><a href="#" id="resetGame">🔄 ゲームをリセットする</a></li>     </ul>
+  </nav>
 
-  <div id="overlay"></div>
+  <div id="overlay"></div>
 
-  <main>
-    <h1>ゲームの遊び方</h1>
-    <div class="card">
-      <ol>
-        <li>出雲大社エリアの5つのスポットを探そう！</li>
-        <li>各スポットで合言葉（パスワード）を見つけよう！</li>
-        <li>ホーム画面に戻って、スポットごとに合言葉を入力！</li>
-        <li>正しい合言葉を入力するとキーワードが1文字手に入るよ！</li>
-        <li>5つ全部そろったら、景品をゲット！</li>
-      </ol>
-      <p>
-        ※ 途中でページを閉じても、進行状況は保存されます。<br>
-        最後にアンケートをお答えしていただくと助かります。
-      </p>
-      <button onclick="startGame()">ゲームを始める</button>
-    </div>
-  </main>
+  <main>
+    <h1>ゲームの遊び方</h1>
+    <div class="card">
+      <ol>
+        <li>出雲大社エリアの5つのスポットを探そう！</li>
+        <li>各スポットで合言葉（パスワード）を見つけよう！</li>
+        <li>ホーム画面に戻って、スポットごとに合言葉を入力！</li>
+        <li>正しい合言葉を入力するとキーワードが1文字手に入るよ！</li>
+        <li>5つ全部そろったら、景品をゲット！</li>
+      </ol>
+      <p>
+        ※ 途中でページを閉じても、進行状況は保存されます。<br>
+        最後にアンケートをお答えしていただくと助かります。
+      </p>
+      <button onclick="window.location.href='index.html'">ゲームを始める</button>     </div>
+  </main>
 
-  <script>
-    function toggleMenu() {
-      const menuToggle = document.getElementById('menuToggle');
-      const menu = document.getElementById('menu');
-      const overlay = document.getElementById('overlay');
-
-      menuToggle.classList.toggle('open');
-      menu.classList.toggle('open');
-      overlay.classList.toggle('active');
-
-      const isOpen = menu.classList.contains('open');
-      menu.setAttribute('aria-hidden', !isOpen);
-      menuToggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+  <script>
+    // ニックネーム取得してタイトルに表示
+    const nickname = localStorage.getItem("nickname");
+    if (nickname) {
+        document.getElementById("title").textContent = `出雲大社 ${nickname} のクイズラリー`;
+    } else {
+        document.getElementById("title").textContent = `出雲大社 クイズラリー`;
     }
 
-    document.getElementById('menuToggle').addEventListener('click', toggleMenu);
-    document.getElementById('overlay').addEventListener('click', toggleMenu);
+    // ハンバーガーメニュー動作 (共通関数)
+    function toggleMenu() {
+      const menuToggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('menu');
+      const overlay = document.getElementById('overlay');
 
-    document.querySelectorAll('#menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('menu').classList.remove('open');
-        document.getElementById('overlay').classList.remove('active');
-        document.getElementById('menuToggle').classList.remove('open');
-        document.getElementById('menu').setAttribute('aria-hidden', true);
-      });
+      menuToggle.classList.toggle('open');
+      menu.classList.toggle('open');
+      overlay.classList.toggle('active');
+
+      const isOpen = menu.classList.contains('open');
+      menu.setAttribute('aria-hidden', !isOpen);
+      menuToggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    }
+
+    document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+    document.getElementById('overlay').addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('open');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('menuToggle').classList.remove('open');
+        document.getElementById('menu').setAttribute('aria-hidden', true);
+      });
+    });
+
+    // 現在のページメニューをアクティブにする
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname.split('/').pop();
+        document.querySelectorAll('#menu a').forEach(link => {
+            const linkPath = link.href.split('/').pop();
+            if (currentPath === linkPath) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
     });
 
-    function startGame() {
-      window.location.href = "index.html";
-    }
-  </script>
+    // ゲームリセット機能
+    document.getElementById('resetGame').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (confirm('本当にゲームの進行状況をリセットしますか？集めた文字やニックネームが消えます。')) {
+            localStorage.removeItem("earnedChars");
+            localStorage.removeItem("nickname");
+            location.reload(); // ページをリロードして初期状態に戻す
+        }
+    });
+  </script>
 
 </body>
 </html>
