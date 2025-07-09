@@ -9,18 +9,27 @@
 </head>
 <body>
 
+  <!-- ヘッダーとハンバーガーメニュー -->
   <header>
     <h1 id="title">出雲大社 クイズラリー</h1>
-    <div class="menu-toggle" id="menu-toggle">☰</div>
-    <nav id="menu" class="hidden">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="howtoplay.html">ゲームの遊び方</a></li>
-        <li><a href="map.html">スポットマップ</a></li>
-      </ul>
-    </nav>
+    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
+  <!-- メニュー本体 -->
+  <nav id="menu" class="hidden" aria-hidden="true">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
+      <li><a href="map.html">スポットマップ</a></li>
+    </ul>
+  </nav>
+  <div id="overlay"></div>
+
+  <!-- メインコンテンツ -->
   <main>
     <h1>ゲームの遊び方</h1>
     <div class="card">
@@ -39,17 +48,32 @@
     </div>
   </main>
 
+  <!-- スクリプト -->
   <script>
-    const toggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("menu");
+    function toggleMenu() {
+      const menuToggle = document.getElementById('menuToggle');
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("overlay");
 
-    toggle.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
-    });
+      menuToggle.classList.toggle("open");
+      menu.classList.toggle("open");
+      overlay.classList.toggle("active");
 
+      const isOpen = menu.classList.contains("open");
+      menu.setAttribute("aria-hidden", !isOpen);
+      menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+    }
+
+    document.getElementById("menuToggle").addEventListener("click", toggleMenu);
+    document.getElementById("overlay").addEventListener("click", toggleMenu);
+
+    // メニュー内リンククリック時にメニューを閉じる
     document.querySelectorAll("#menu a").forEach(link => {
       link.addEventListener("click", () => {
-        menu.classList.add("hidden");
+        document.getElementById("menu").classList.remove("open");
+        document.getElementById("overlay").classList.remove("active");
+        document.getElementById("menuToggle").classList.remove("open");
+        document.getElementById("menu").setAttribute("aria-hidden", true);
       });
     });
 
