@@ -1,346 +1,540 @@
-/* 全体共通設定 */
+/* ベーススタイル: 全体的なフォント、背景、基本の文字色 */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  background-color: #fff8f0;
-  color: #4b2e1e;
+    margin: 0;
+    padding: 0;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background-color: #fcf6ed; /* 暖かく、少し明るいベージュ系の背景 */
+    color: #4b2e1e; /* 落ち着いた茶色系の文字色 */
+    line-height: 1.6;
+    overflow-x: hidden; /* 横スクロール防止 */
 }
 
-/* ヘッダー */
+/* ヘッダー: アプリのタイトルバー */
 header {
-  background-color: #fff4e1;
-  padding: 10px 20px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  border-bottom: 2px solid #e0c8a0;
+    background-color: #fff4e1; /* 明るいクリーム色 */
+    padding: 10px 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px; /* 高さの確保 */
+    border-bottom: 2px solid #e0c8a0; /* 下線で区切り */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* わずかな影で立体感 */
 }
 
 header h1 {
-  font-size: 1.4rem;
-  margin: 0;
-  text-align: center;
+    font-size: 1.6rem; /* 少し大きめのタイトル */
+    margin: 0;
+    text-align: center;
+    color: #8b5e3c; /* タイトル専用の色 */
+    font-weight: bold;
 }
 
-/* ハンバーガーメニュー */
+/* ハンバーガーメニューアイコン */
 .menu-toggle {
-  position: absolute;
-  top: 12px;
-  right: 20px;
-  cursor: pointer;
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1001; /* メニューより手前に表示 */
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* 線の間隔 */
+    padding: 5px; /* クリックしやすいようにパディング */
 }
 
 .menu-toggle span {
-  display: block;
-  width: 28px;
-  height: 3px;
-  background-color: #6b4c3b;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #6b4c3b; /* 線の色 */
+    border-radius: 2px;
+    transition: all 0.3s ease; /* アニメーション */
 }
 
+/* ハンバーガーメニューが開いた時のアニメーション */
 .menu-toggle.open span:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
+    transform: rotate(45deg) translateY(8px);
 }
 .menu-toggle.open span:nth-child(2) {
-  opacity: 0;
+    opacity: 0; /* 中央の線を消す */
 }
 .menu-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
+    transform: rotate(-45deg) translateY(-8px);
 }
 
-/* ナビゲーションメニュー */
+/* ナビゲーションメニュー本体 */
 #menu {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 220px;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-  transition: left 0.4s ease;
-  z-index: 1000;
-  padding-top: 70px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* 最初は画面外に隠す */
+    width: 220px;
+    height: 100%;
+    background-color: #fff; /* メニュー背景 */
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15); /* 強めの影 */
+    transition: left 0.4s ease; /* スライドアニメーション */
+    z-index: 1000;
+    padding-top: 80px; /* ヘッダー分空ける */
+    overflow-y: auto; /* 内容が多ければスクロール */
 }
 
 #menu.open {
-  left: 0;
+    left: 0; /* 開くと表示 */
 }
 
 #menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 #menu li a {
-  display: block;
-  padding: 15px 20px;
-  color: #4b2e1e;
-  text-decoration: none;
-  font-weight: bold;
-  border-bottom: 1px solid #eee2d0;
-  transition: background-color 0.3s ease;
+    display: block;
+    padding: 15px 20px;
+    color: #4b2e1e;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px solid #eee2d0; /* 区切り線 */
+    transition: background-color 0.3s ease;
+    font-size: 1.05rem;
 }
 
 #menu li a:hover {
-  background-color: #fdf3e7;
+    background-color: #fdf3e7; /* ホバー時の色 */
 }
 
 /* 現在のページを示すメニューリンク */
 #menu li a.active {
-    background-color: #fdf3e7; /* 現在のページの背景色 */
-    color: #b6894c; /* 色を少し変える */
+    background-color: #fdf3e7;
+    color: #b6894c;
     cursor: default; /* クリック不可に */
+    position: relative;
+}
+
+#menu li a.active::before {
+    content: '▶'; /* 現在のページを示すアイコン */
+    position: absolute;
+    left: 5px;
+    color: #f0b35a;
+    font-size: 0.8em;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 
-/* オーバーレイ */
+/* オーバーレイ: メニューが開いた時に背景を暗くする */
 #overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  width: 100%;
-  height: 100%;
-  display: none;
-  z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒 */
+    width: 100%;
+    height: 100%;
+    display: none; /* 最初は非表示 */
+    z-index: 999;
 }
 
 #overlay.active {
-  display: block;
+    display: block; /* メニューが開くと表示 */
 }
 
-/* メイン */
+/* メインコンテンツエリア */
 main {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-sizing: border-box; /* パディングを含めて幅を計算 */
 }
 
 main h1 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 1em;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1em;
+    color: #8b5e3c;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
-/* カードスタイル */
+/* カード共通スタイル: コンテンツを囲む白いボックス */
 .card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
-  line-height: 1.6;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px; /* 丸みを強く */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 強めの影 */
+    margin-bottom: 30px;
 }
 
-/* 入力・ボタンエリア */
+/* テキスト入力フィールド */
 input[type="text"] {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  margin-bottom: 8px;
-  border: 2px solid #dab48a;
-  border-radius: 6px;
-  font-size: 1rem;
+    width: calc(100% - 22px); /* パディングとボーダーを考慮 */
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 2px solid #dab48a; /* 温かみのあるボーダー */
+    border-radius: 8px; /* 丸みを強く */
+    font-size: 1.1rem;
+    color: #4b2e1e;
+    box-sizing: border-box; /* パディングを含めて幅を計算 */
 }
 
+input[type="text"]::placeholder {
+    color: #a0a0a0;
+}
+
+/* ボタン */
 button {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  background-color: #f0b35a;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px; /* 最大幅を設定 */
+    padding: 12px;
+    background-color: #f0b35a; /* 目を引くオレンジ色 */
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem; /* 少し大きめの文字 */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ボタンにも影 */
 }
 
 button:hover {
-  background-color: #e49d3b;
+    background-color: #e49d3b; /* ホバーで少し濃く */
+    transform: translateY(-2px); /* わずかに浮き上がる効果 */
 }
 
-/* 文字ボックス */
+button:active {
+    transform: translateY(0); /* クリックで沈む効果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* ニックネーム入力ページ専用スタイル */
+body.nickname-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 画面全体で中央寄せ */
+    background-color: #fcf6ed;
+}
+
+body.nickname-page main {
+    padding: 30px;
+    max-width: 450px;
+    width: 90%;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.nickname-label {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: #8b5e3c;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.08);
+}
+
+.nickname-input {
+    width: calc(100% - 40px); /* 左右のパディング考慮 */
+    padding: 15px;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    border-width: 3px; /* ボーダーを太く */
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: #d15353; /* 警告に使う赤 */
+    font-size: 0.95em;
+    margin-top: 5px;
+    text-align: center;
+    min-height: 1.2em; /* メッセージがないときも高さが崩れないように */
+    font-weight: bold;
+}
+
+/* 集めた文字の表示エリア */
+h2 {
+    font-size: 1.5rem;
+    color: #6b4c3b;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    text-align: center;
+}
+
 .box-container {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    justify-content: center; /* 中央寄せ */
+    gap: 15px; /* ボックス間のスペース */
+    margin: 25px 0;
+    flex-wrap: wrap; /* 小さい画面で折り返す */
 }
 
 .char-box {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #b6894c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-  border-radius: 8px;
-  background-color: #fff;
+    width: 60px; /* 少し大きめ */
+    height: 60px;
+    background-color: #ffecc6; /* 明るい黄色系の背景 */
+    border: 3px solid #f0b35a; /* 目を引くボーダー */
+    border-radius: 12px; /* 角を丸く */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem; /* 文字サイズを大きく */
+    font-weight: bold;
+    color: #8b5e3c; /* 文字色 */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
 
-/* スポットごとのスタイル */
+.char-box:hover {
+    transform: translateY(-3px); /* ホバーで少し浮き上がる */
+}
+
+/* 各スポットの入力エリア */
 #spots > div {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px; /* 各スポット間の余白 */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
     border: 2px solid #dab48a; /* デフォルトのボーダー */
-    transition: all 0.3s ease; /* 変化を滑らかに */
-    text-align: center; /* h2, input, button を中央寄せに */
+    transition: all 0.3s ease;
+    text-align: center; /* コンテンツを中央寄せ */
 }
 
 /* 完了したスポットのスタイル */
 #spots > div.completed {
     background-color: #e6ffe6; /* 薄い緑色 */
     border-color: #6aaa5a; /* 緑色のボーダー */
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1); /* 少し影を濃く */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 #spots > div.completed h2 {
-    color: #4b8a4a; /* タイトルの色も変更 */
+    color: #4b8a4a;
 }
 
 #spots > div.completed h2::after {
-    content: ' ✅'; /* タイトルの横にチェックマーク */
+    content: ' ✅';
     color: #4b8a4a;
-    font-size: 1em; /* サイズ調整 */
+    font-size: 1em;
     vertical-align: middle;
-    margin-left: 5px;
+    margin-left: 8px;
 }
 
-/* 完了した入力欄とボタンのスタイル */
 #spots > div.completed input[type="text"] {
-    background-color: #f0f0f0; /* 入力欄の背景色をグレーに */
+    background-color: #f0f0f0;
     border-color: #ccc;
     cursor: not-allowed;
 }
 
 #spots > div.completed button {
-    background-color: #a0a0a0; /* ボタンの色をグレーに */
+    background-color: #a0a0a0;
     cursor: not-allowed;
 }
 
 #spots > div.completed button:hover {
-    background-color: #909090; /* ホバー時の色も変更 */
+    background-color: #909090;
+    transform: none;
 }
 
-/* 完成メッセージ */
-#complete {
-  background-color: #eaffd0;
-  border: 2px dashed #8dcf54;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-/* ステータスメッセージ */
-#status {
-  margin-top: 20px;
-  font-weight: bold;
-  color: #d15353; /* 赤色 */
-  background-color: #ffe6e6; /* 薄い赤色の背景 */
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: 1px solid #d15353;
-  text-align: center;
-  display: inline-block; /* 内容に合わせて幅を調整 */
-  max-width: fit-content; /* 最大幅を内容に合わせる */
-  margin-left: auto; /* 中央寄せ */
-  margin-right: auto; /* 中央寄せ */
-}
-
-/* ニックネーム入力ページ用 */
-body.nickname-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* 画面中央に配置 */
-    background-color: #fff8f0;
-}
-
-body.nickname-page main {
-    padding: 20px;
-    max-width: 400px; /* 入力エリアの最大幅 */
-    width: 90%; /* レスポンシブ対応 */
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
-    text-align: center;
-}
-
-.nickname-label {
-    font-size: 1.5rem;
+/* クイズページ用のスタイル */
+#quiz-question {
+    font-size: 1.4rem;
+    font-weight: bold;
     margin-bottom: 20px;
-    color: #4b2e1e;
-}
-
-.nickname-input {
-    width: calc(100% - 20px); /* paddingを考慮 */
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #dab48a;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    text-align: center; /* 入力文字も中央寄せに */
-}
-
-.nickname-input::placeholder {
-    color: #a0a0a0;
-}
-
-.error-message {
-    color: #d15353; /* 赤色 */
-    font-size: 0.9em;
-    margin-top: 5px;
+    color: #6b4c3b;
     text-align: center;
-    min-height: 1.2em; /* メッセージがないときも高さが崩れないように */
 }
 
+#answers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* ボタン間の間隔 */
+    margin-top: 20px;
+}
 
-/* Googleマップリンクボタンのスタイル */
-.link-btn {
-    display: inline-block;
+#answers button {
+    width: 100%; /* 親要素の幅いっぱいに広げる */
+    padding: 15px;
+    font-size: 1.15rem;
+}
+
+/* クイズ結果ステータスメッセージ */
+#status {
+    margin-top: 25px;
+    font-weight: bold;
     padding: 12px 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 200px; /* 最小幅 */
+}
+
+#status[style*="color: green"] { /* 正解メッセージ */
+    color: #28a745;
+    background-color: #e6ffe6;
+    border: 1px solid #28a745;
+}
+
+#status[style*="color: blue"] { /* 既に獲得済みメッセージ */
+    color: #007bff;
+    background-color: #e6f2ff;
+    border: 1px solid #007bff;
+}
+
+#status[style*="color: red"] { /* 不正解メッセージ */
+    color: #dc3545;
+    background-color: #ffe6e6;
+    border: 1px solid #dc3545;
+}
+
+/* 全て集まった時のメッセージ */
+#complete {
+    background-color: #eaffd0;
+    border: 3px dashed #8dcf54; /* 破線ボーダー */
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: #4b8a4a;
+    font-size: 1.3rem;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#complete a {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #f0b35a;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+#complete a:hover {
+    background-color: #e49d3b;
+}
+
+/* Googleマップリンクボタン (マップページ用) */
+.link-btn {
+    display: block; /* ブロック要素にして中央寄せしやすく */
+    margin: 25px auto; /* 上下の余白と中央寄せ */
+    padding: 15px 25px;
     background-color: #f0b35a;
     color: #fff;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: bold;
+    font-size: 1.2rem;
     text-align: center;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
 .link-btn:hover {
     background-color: #e49d3b;
+    transform: translateY(-2px);
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fdf3e7;
+    border-top: 1px solid #eee2d0;
+    color: #6b4c3b;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #b6894c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
 
 
-/* レスポンシブ */
+/* レスポンシブデザインの調整 */
 @media (min-width: 768px) {
-  .box-container {
-    justify-content: center;
-  }
+    header h1 {
+        font-size: 2rem;
+    }
 
-  header {
-    justify-content: space-between;
-    padding: 10px 40px;
-  }
+    /* ハンバーガーメニューはデスクトップでは非表示 */
+    .menu-toggle {
+        display: none;
+    }
 
-  main {
-    padding: 40px;
-  }
+    #menu {
+        position: static; /* 固定解除 */
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        box-shadow: none;
+        padding-top: 0;
+        margin-left: auto; /* ヘッダー内で右寄せ */
+    }
+
+    #menu ul {
+        display: flex; /* 横並び */
+    }
+
+    #menu li a {
+        border-bottom: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+    }
+
+    #menu li a:hover {
+        background-color: #ffecc6; /* 背景色を変更 */
+    }
+
+    #menu li a.active {
+        background-color: #f0b35a; /* アクティブ時の背景色を強調 */
+        color: #fff; /* 文字色も白に */
+    }
+
+    #menu li a.active::before {
+        display: none; /* デスクトップでは矢印非表示 */
+    }
+
+    #overlay {
+        display: none !important; /* デスクトップではオーバーレイを完全に非表示 */
+    }
+
+    main h1 {
+        font-size: 2.5rem;
+    }
+
+    .char-box {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+    }
+
+    #spots > div {
+        padding: 35px;
+    }
+
+    #answers button {
+        max-width: 400px; /* ボタンの最大幅を調整 */
+        margin: 0 auto; /* 中央寄せ */
+    }
+
+    .nickname-label {
+        font-size: 2.5rem;
+    }
 }
