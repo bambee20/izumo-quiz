@@ -13,23 +13,21 @@
       <input type="text" id="nicknameInput" class="nickname-input" placeholder="ニックネーム">
       <button id="startButton">スタート！</button>
     </div>
-  </main>
-
+<!-- nickname.html の末尾 -->
+</main>
 
 <script>
-  function saveNickname() {
-    const nickname = document.getElementById("nickname").value.trim();
-    if (nickname === "") {
-      alert("ニックネームを入力してください。");
-      return;
+  document.getElementById("startButton").addEventListener("click", () => {
+    const name = document.getElementById("nicknameInput").value.trim();
+    if (name) {
+      localStorage.setItem("nickname", name);
+      window.location.href = "howtoplay.html";
+    } else {
+      alert("ニックネームを入力してください！");
     }
-
-    localStorage.setItem("nickname", nickname);
-
-    // 遷移の流れ：howtoplay.html → index.html
-    window.location.href = "howtoplay.html?from=nickname";
-  }
+  });
 </script>
 
 </body>
 </html>
+
