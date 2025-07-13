@@ -127,6 +127,8 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.1s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
 }
 
 button:hover {
@@ -238,7 +240,6 @@ header {
   transform: rotate(-45deg) translateY(-9px);
 }
 
-/* メニューの表示・非表示 */
 nav#menu {
   position: fixed;
   top: 0;
@@ -294,7 +295,6 @@ nav#menu ul li a.active {
   display: block;
 }
 
-/* ===== カード用（使い方ページなど） ===== */
 .card {
   background-color: #fff;
   border-radius: 12px;
@@ -304,7 +304,7 @@ nav#menu ul li a.active {
 }
 
 .card ol {
-  text-align: center;
+  text-align: left;
   padding-left: 1.2em;
 }
 
@@ -312,10 +312,34 @@ nav#menu ul li a.active {
   margin: 10px 0;
 }
 
+.card .start-button {
+  text-align: center;
+}
+
+.card .start-button button {
+  margin-top: 20px;
+}
+
+/* ===== クイズ選択肢を縦並びにする ===== */
+.quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
 /* ===== レスポンシブ対応（タブレット〜PC） ===== */
 @media (min-width: 768px) {
   h1 {
     font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  main p, li, .quiz-choices button {
+    font-size: 1.2rem;
   }
 
   .char-box {
@@ -330,6 +354,5 @@ nav#menu ul li a.active {
 
   button {
     max-width: 400px;
-    margin: 0 auto;
   }
 }
