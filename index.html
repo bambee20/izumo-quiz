@@ -5,94 +5,34 @@
   <title>出雲大社 クイズラリー</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
 </head>
-<body>
+<body class="nickname-page">
   <main>
-    <h1>出雲大社 クイズラリー</h1>
-
-    <h2>集めた文字</h2>
-    <div class="box-container" id="char-boxes">
-      <!-- 文字ボックスがここに入る -->
-    </div>
-
-    <div id="spots">
-      <div id="spot1">
-        <h2>スポット①</h2>
-        <input type="text" value="か" disabled>
-        <button disabled>確認</button>
-      </div>
-      <div id="spot2">
-        <h2>スポット②</h2>
-        <input type="text" value="ぐ" disabled>
-        <button disabled>確認</button>
-      </div>
-      <div id="spot3">
-        <h2>スポット③</h2>
-        <input type="text" value="ら" disabled>
-        <button disabled>確認</button>
-      </div>
-      <div id="spot4">
-        <h2>スポット④</h2>
-        <input type="text" value="で" disabled>
-        <button disabled>確認</button>
-      </div>
-      <div id="spot5">
-        <h2>スポット⑤</h2>
-        <input type="text" value="ん" disabled>
-        <button disabled>確認</button>
-      </div>
-    </div>
-
-    <div id="complete" style="display: none;">
-      全ての文字を集めました！おめでとうございます 🎉<br>
-      <a href="finish.html">ゴールページへ進む</a>
-    </div>
+    <h1 class="nickname-label">スポットへ行こう！</h1>
+    <input id="keywordInput" type="text" class="nickname-input" placeholder="合言葉を入力" />
+    <button onclick="checkPassword()">移動する</button>
+    <p id="errorMessage" class="error-message"></p>
   </main>
 
-  <footer>
-    <p>&copy; 2025 出雲大社クイズラリー</p>
-  </footer>
-
   <script>
-    const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
-
-    const spotChars = {
-      spot1: "か",
-      spot2: "ぐ",
-      spot3: "ら",
-      spot4: "で",
-      spot5: "ん"
+    const passwords = {
+      "うさぎ": "spot1.html",
+      "しめなわ": "spot2.html",
+      "こくそ": "spot3.html",
+      "かみのみち": "spot4.html",
+      "ごえん": "spot5.html"
     };
 
-    // 各スポットの状態を反映
-    for (const [spotId, char] of Object.entries(spotChars)) {
-      const spotEl = document.getElementById(spotId);
-      const input = spotEl.querySelector("input");
-      const button = spotEl.querySelector("button");
+    function checkPassword() {
+      const input = document.getElementById("keywordInput").value.trim();
+      const errorEl = document.getElementById("errorMessage");
 
-      input.value = char;
-      if (earned.includes(char)) {
-        spotEl.classList.add("completed");
-        input.disabled = true;
-        button.disabled = true;
+      if (passwords[input]) {
+        window.location.href = passwords[input];
+      } else {
+        errorEl.textContent = "合言葉が間違っています。";
       }
-    }
-
-    // 集めた文字をボックス表示
-    const boxContainer = document.getElementById("char-boxes");
-    earned.forEach(char => {
-      const box = document.createElement("div");
-      box.className = "char-box";
-      box.textContent = char;
-      boxContainer.appendChild(box);
-    });
-
-    // 全て集まったらゴールメッセージ表示
-    const allChars = Object.values(spotChars);
-    const isComplete = allChars.every(c => earned.includes(c));
-    if (isComplete) {
-      document.getElementById("complete").style.display = "block";
     }
   </script>
 </body>
