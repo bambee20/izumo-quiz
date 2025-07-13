@@ -16,6 +16,10 @@ main {
   box-sizing: border-box;
 }
 
+main p{
+  text-align: center;
+}
+
 /* ===== 見出し ===== */
 h1 {
   font-size: 2rem;
@@ -239,7 +243,7 @@ header {
 nav#menu {
   position: fixed;
   top: 0;
-  right: -250px;
+  right: -280px;
   width: 240px;
   height: 100vh;
   background-color: #fff9f0;
