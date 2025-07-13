@@ -1,216 +1,217 @@
-/* 基本設定 */
+/* ===== 共通設定 ===== */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    background-color: #fcf6ed;
-    color: #4b2e1e;
-    line-height: 1.6;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: #fcf6ed;
+  color: #4b2e1e;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 main {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    box-sizing: border-box;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
+/* ===== 見出し ===== */
 h1 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 1em;
-    color: #8b5e3c;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1em;
+  color: #8b5e3c;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
 h2 {
-    font-size: 1.5rem;
-    color: #6b4c3b;
-    margin-top: 1.5em;
-    margin-bottom: 0.8em;
-    text-align: center;
+  font-size: 1.5rem;
+  color: #6b4c3b;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  text-align: center;
 }
 
-/* 文字ボックス */
+/* ===== 文字ボックス（獲得文字表示） ===== */
 .box-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 25px 0;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  flex-wrap: wrap;
 }
 
 .char-box {
-    width: 60px;
-    height: 60px;
-    background-color: #ffecc6;
-    border: 3px solid #f0b35a;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #8b5e3c;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+  width: 60px;
+  height: 60px;
+  background-color: #ffecc6;
+  border: 3px solid #f0b35a;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #8b5e3c;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
 }
 
 .char-box:hover {
-    transform: translateY(-3px);
+  transform: translateY(-3px);
 }
 
-/* スポット表示 */
+/* ===== スポットブロック ===== */
 #spots > div {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
-    border: 2px solid #dab48a;
-    text-align: center;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  border: 2px solid #dab48a;
+  text-align: center;
 }
 
-/* スポット完了時のスタイル */
+/* クリア済みスポット */
 #spots > div.completed {
-    background-color: #e6ffe6;
-    border-color: #6aaa5a;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  background-color: #e6ffe6;
+  border-color: #6aaa5a;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 #spots > div.completed h2 {
-    color: #4b8a4a;
+  color: #4b8a4a;
 }
 
 #spots > div.completed h2::after {
-    content: ' ✅';
-    color: #4b8a4a;
-    font-size: 1em;
-    vertical-align: middle;
-    margin-left: 8px;
+  content: ' ✅';
+  color: #4b8a4a;
+  font-size: 1em;
+  vertical-align: middle;
+  margin-left: 8px;
 }
 
-/* 入力欄（装飾目的・使用不可） */
+/* ===== 合言葉入力欄 ===== */
 input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 2px solid #dab48a;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    color: #4b2e1e;
-    background-color: #fdfdfd;
+  width: calc(100% - 22px);
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 2px solid #dab48a;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: #4b2e1e;
+  background-color: #fdfdfd;
 }
 
 input[type="text"]:disabled {
-    background-color: #f0f0f0;
-    border-color: #ccc;
-    cursor: not-allowed;
+  background-color: #f0f0f0;
+  border-color: #ccc;
+  cursor: not-allowed;
 }
 
-/* ボタン */
+/* ===== ボタン ===== */
 button {
-    width: 100%;
-    max-width: 300px;
-    padding: 12px;
-    background-color: #f0b35a;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  background-color: #f0b35a;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background-color: #e49d3b;
-    transform: translateY(-2px);
+  background-color: #e49d3b;
+  transform: translateY(-2px);
 }
 
 button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
-/* 完了メッセージ */
+/* ===== 完了表示 ===== */
 #complete {
-    background-color: #eaffd0;
-    border: 3px dashed #8dcf54;
-    padding: 30px;
-    margin-top: 40px;
-    border-radius: 20px;
-    text-align: center;
-    color: #4b8a4a;
-    font-size: 1.3rem;
-    font-weight: bold;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #eaffd0;
+  border: 3px dashed #8dcf54;
+  padding: 30px;
+  margin-top: 40px;
+  border-radius: 20px;
+  text-align: center;
+  color: #4b8a4a;
+  font-size: 1.3rem;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 #complete a {
-    display: inline-block;
-    margin-top: 20px;
-    background-color: #f0b35a;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #f0b35a;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
 }
 
 #complete a:hover {
-    background-color: #e49d3b;
+  background-color: #e49d3b;
 }
 
-/* フッター */
+/* ===== フッター ===== */
 footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #fdf3e7;
-    border-top: 1px solid #eee2d0;
-    color: #6b4c3b;
-    font-size: 0.9em;
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fdf3e7;
+  border-top: 1px solid #eee2d0;
+  color: #6b4c3b;
+  font-size: 0.9em;
 }
 
 footer a {
-    color: #b6894c;
-    text-decoration: none;
-    font-weight: bold;
+  color: #b6894c;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* レスポンシブ対応 */
+/* ===== レスポンシブ対応（タブレット〜PC） ===== */
 @media (min-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
+  h1 {
+    font-size: 2.5rem;
+  }
 
-    .char-box {
-        width: 70px;
-        height: 70px;
-        font-size: 2.5rem;
-    }
+  .char-box {
+    width: 70px;
+    height: 70px;
+    font-size: 2.5rem;
+  }
 
-    #spots > div {
-        padding: 35px;
-    }
+  #spots > div {
+    padding: 35px;
+  }
 
-    button {
-        max-width: 400px;
-        margin: 0 auto;
-    }
+  button {
+    max-width: 400px;
+    margin: 0 auto;
+  }
 }
