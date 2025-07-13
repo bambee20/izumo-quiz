@@ -1,101 +1,86 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>スポット クイズ</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <title>スポット クイズ</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1 id="quiz-title">スポット クイズ</h1>
-  <div class="card">
-    <p id="quiz-question">問題読み込み中...</p>
-    <div id="answers"></div>
-    <p id="status"></p>
-  </div>
+  <h1 id="quiz-title">スポット クイズ</h1>
+  <div class="card">
+    <p id="quiz-question">問題読み込み中...</p>
+    <div id="answers"></div>
+    <p id="status"></p>
+  </div>
 
-  <footer>
-    <p><a href="index.html">トップ画面に戻る</a></p>
-  </footer>
+  <footer>
+    <p><a href="index.html">トップ画面に戻る</a></p>
+  </footer>
 
-  <script src="quizzes.js"></script>   <script>
-    // --- ★ここを各ファイルに合わせて変更します★ ---
-    const spotNumber = 2; // このファイルをspot1.htmlとして使うなら1、spot2.htmlなら2、など
-    const char = "ぐ"; // このファイルをspot1.htmlとして使うなら"か"、spot2.htmlなら"ぐ"、など
-    // --- ★変更ここまで★ ---
+  <script src="quizzes.js"></script>
+  <script>
+    // === ★各スポットに応じて変更 ===
+    const spotNumber = 2; // spot1.htmlなら1
+    const char = "ぐ";    // spot1.htmlなら「か」
+    // ============================
 
-    const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
-    const quizList = allQuizzes[`spot${spotNumber}`]; // quizzes.jsから該当するクイズデータを取得
-
-    // ニックネーム取得してタイトルに表示
+    const earned = JSON.parse(localStorage.getItem("earnedChars")) || [];
+    const quizList = allQuizzes[`spot${spotNumber}`];
     const nickname = localStorage.getItem("nickname");
+
+    // タイトルにニックネーム表示
     if (nickname) {
-        document.getElementById("quiz-title").textContent = `スポット${spotNumber} ${nickname} のクイズ`;
+      document.getElementById("quiz-title").textContent = `スポット${spotNumber} ${nickname} のクイズ`;
     } else {
-        document.getElementById("quiz-title").textContent = `スポット${spotNumber} クイズ`;
+      document.getElementById("quiz-title").textContent = `スポット${spotNumber} クイズ`;
     }
 
-    let quiz; // quiz変数をグローバルスコープで宣言
+    let quiz;
 
-    // ページロード時の処理
-    window.onload = () => {
-        const statusEl = document.getElementById("status");
-        const quizQuestionEl = document.getElementById("quiz-question");
-        const answersDivEl = document.getElementById("answers");
+    window.onload = () => {
+      const statusEl = document.getElementById("status");
+      const quizQuestionEl = document.getElementById("quiz-question");
+      const answersDivEl = document.getElementById("answers");
 
-        if (earned.includes(char)) {
-            quizQuestionEl.textContent = "このスポットの文字は既に獲得済みです！";
-            answersDivEl.innerHTML = ''; // 選択肢を非表示にする
-            statusEl.style.color = "blue";
-            statusEl.textContent = "トップ画面に戻りましょう。";
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 3000); // 3秒後にリダイレクト
-        } else {
-            quiz = quizList[Math.floor(Math.random() * quizList.length)]; // 問題をランダムに選択
-            quizQuestionEl.textContent = quiz.question;
+      // 既に獲得済みならメッセージ表示
+      if (earned.includes(char)) {
+        quizQuestionEl.textContent = "このスポットの文字は既に獲得済みです！";
+        answersDivEl.innerHTML = '';
+        statusEl.style.color = "blue";
+        statusEl.textContent = "トップ画面に戻りましょう。";
+        setTimeout(() => window.location.href = "index.html", 3000);
+        return;
+      }
 
-            quiz.options.forEach(option => {
-                const btn = document.createElement("button");
-                btn.textContent = option;
-                btn.onclick = () => checkAnswer(option);
-                answersDivEl.appendChild(btn);
-            });
-        }
-    };
+      // クイズ出題（ランダム）
+      quiz = quizList[Math.floor(Math.random() * quizList.length)];
+      quizQuestionEl.textContent = quiz.question;
 
-    function checkAnswer(selected) {
-        const statusEl = document.getElementById("status");
-        const answersDivEl = document.getElementById("answers");
-        const answerButtons = answersDivEl.querySelectorAll("button");
+      quiz.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        answersDivEl.appendChild(btn);
+      });
+    };
 
-        if (selected === quiz.answer) {
-            if (!earned.includes(char)) {
-                earned.push(char);
-                localStorage.setItem("earnedChars", JSON.stringify(earned));
-                statusEl.style.color = "green";
-                statusEl.textContent = `正解！文字「${char}」をゲット！`;
+    function checkAnswer(selected) {
+      const statusEl = document.getElementById("status");
+      const answersDivEl = document.getElementById("answers");
+      const buttons = answersDivEl.querySelectorAll("button");
 
-                // 正解後、全ての選択肢ボタンを無効化
-                answerButtons.forEach(btn => btn.disabled = true);
-
-                // 一定時間後にトップ画面に戻る
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 3000); // 3秒後にリダイレクト
-            } else {
-                statusEl.style.color = "blue";
-                statusEl.textContent = "その文字はもうゲット済みです。トップ画面に戻ろう！";
-                answerButtons.forEach(btn => btn.disabled = true); // 既に文字取得済みの場合もボタン無効化
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 3000); // 3秒後にリダイレクト
-            }
-        } else {
-            statusEl.style.color = "red";
-            statusEl.textContent = "不正解。もう一度チャレンジ！";
-            // 不正解の場合はボタンを無効化しない（再試行のため）
-        }
-    }
-  </script>
+      if (selected === quiz.answer) {
+        earned.push(char);
+        localStorage.setItem("earnedChars", JSON.stringify(earned));
+        statusEl.style.color = "green";
+        statusEl.textContent = `正解！文字「${char}」をゲット！`;
+        buttons.forEach(btn => btn.disabled = true);
+        setTimeout(() => window.location.href = "index.html", 3000);
+      } else {
+        statusEl.style.color = "red";
+        statusEl.textContent = "不正解。もう一度チャレンジ！";
+      }
+    }
+  </script>
 </body>
 </html>
