@@ -1,11 +1,11 @@
-/* ===== 共通設定 ===== */
 body {
   margin: 0;
   padding: 0;
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  background: linear-gradient(135deg, #ffe4f0, #e0f7ff);
-  color: #2c2c2c;
+  background-color: #fff8f0;
+  color: #333;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 main {
@@ -19,98 +19,194 @@ main p {
   text-align: center;
 }
 
-/* ===== タイトル ===== */
+/* ===== 見出し ===== */
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-align: center;
   margin-bottom: 1em;
-  color: #ff1493;
-  text-shadow: 2px 2px #ffccff;
+  color: #ff6f61;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 h2 {
-  font-size: 2rem;
-  color: #1e90ff;
+  font-size: 1.5rem;
+  color: #ff8c42;
   margin-top: 1.5em;
   margin-bottom: 0.8em;
   text-align: center;
-  text-shadow: 1px 1px #d0f0ff;
+}
+
+/* ===== 文字ボックス（獲得文字表示） ===== */
+.box-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+}
+
+.char-box {
+  width: 60px;
+  height: 60px;
+  background-color: #ffe066;
+  border: 3px solid #ff9f1c;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff4e00;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.char-box:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== スポットブロック ===== */
+#spots > div {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  border: 2px solid #ffcb77;
+  text-align: center;
+}
+
+#spots > div.completed {
+  background-color: #d0f0c0;
+  border-color: #00bb7e;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+#spots > div.completed h2 {
+  color: #00aa66;
+}
+
+#spots > div.completed h2::after {
+  content: ' ✅';
+  color: #00aa66;
+  font-size: 1em;
+  vertical-align: middle;
+  margin-left: 8px;
 }
 
 /* ===== 合言葉入力欄 ===== */
 input[type="text"] {
-  width: 100%;
-  padding: 15px;
-  border: 3px dashed #ff69b4;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  background-color: #fff8fb;
-  color: #2c2c2c;
-  box-shadow: 0 0 10px #ffccf9;
+  width: calc(100% - 22px);
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 2px solid #ffcb77;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: #333;
+  background-color: #fffbe6;
 }
 
-/* ===== ボタン ===== */
+input[type="text"]:disabled {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===== ボタン共通 ===== */
 button {
   width: 100%;
   max-width: 300px;
-  margin: 20px auto;
-  display: block;
-  padding: 15px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  background: linear-gradient(45deg, #ff1493, #00e5ff);
+  padding: 12px;
+  background-color: #f95f62;
   border: none;
-  border-radius: 12px;
-  color: white;
-  text-shadow: 1px 1px #000;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+  background-color: #ff6f61;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
-/* ===== クイズ選択肢（縦並び） ===== */
-.quiz-choices {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* ===== 完了表示 ===== */
+#complete {
+  background-color: #e3fcec;
+  border: 3px dashed #3fcb6c;
+  padding: 30px;
+  margin-top: 40px;
+  border-radius: 20px;
+  text-align: center;
+  color: #229e4b;
+  font-size: 1.3rem;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#complete a {
+  display: inline-block;
   margin-top: 20px;
-}
-
-/* ===== 選択肢ボタン ===== */
-.quiz-choices button {
-  background-color: #ffff66;
-  color: #222;
-  border: 2px solid #333;
+  background-color: #f95f62;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
   font-size: 1.1rem;
-  border-radius: 10px;
-  padding: 12px;
-  transition: all 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-.quiz-choices button:hover {
-  background-color: #ffd700;
-  transform: scale(1.05);
+#complete a:hover {
+  background-color: #ff6f61;
+}
+
+/* ===== フッター ===== */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff0e5;
+  border-top: 1px solid #ffe4d4;
+  color: #8b5e3c;
+  font-size: 0.9em;
+}
+
+footer a {
+  color: #ff6f61;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* ===== ハンバーガーメニュー ===== */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffccf9;
-  padding: 15px 20px;
   position: relative;
-  z-index: 100;
+  background-color: #fff0e5;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffe4d4;
 }
 
 .menu-toggle {
@@ -126,7 +222,7 @@ header {
 .menu-toggle span {
   display: block;
   height: 4px;
-  background: #333;
+  background: #f95f62;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -149,8 +245,8 @@ nav#menu {
   right: -280px;
   width: 240px;
   height: 100vh;
-  background-color: #fff0f5;
-  box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+  background-color: #fff8f0;
+  box-shadow: -3px 0 10px rgba(0,0,0,0.1);
   transition: right 0.3s ease;
   padding: 60px 20px;
   z-index: 1000;
@@ -172,55 +268,87 @@ nav#menu ul li {
 
 nav#menu ul li a {
   text-decoration: none;
-  color: #ff1493;
+  color: #f95f62;
   font-size: 1.2rem;
   font-weight: bold;
+  transition: color 0.2s ease;
 }
 
-/* ===== フッター ===== */
-footer {
-  background-color: #ffefff;
-  text-align: center;
-  padding: 20px;
-  color: #777;
-  font-size: 0.9rem;
+nav#menu ul li a:hover,
+nav#menu ul li a.active {
+  color: #ffa07a;
 }
 
-/* ===== キャラボックス（獲得文字） ===== */
-.char-box {
-  width: 60px;
-  height: 60px;
-  background-color: #fff700;
-  border: 3px solid #ff1493;
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.3);
+  z-index: 999;
+  display: none;
+}
+
+#overlay.active {
+  display: block;
+}
+
+.card {
+  background-color: #fff;
   border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #000;
-  box-shadow: 0 0 12px #ffd700;
-  margin: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
-/* ===== レスポンシブ対応 ===== */
+.card ol {
+  text-align: left;
+  padding-left: 1.2em;
+}
+
+.card li {
+  margin: 10px 0;
+}
+
+.card .start-button {
+  text-align: center;
+}
+
+.card .start-button button {
+  margin-top: 20px;
+}
+
+/* ===== クイズ選択肢を縦並びにする ===== */
+.quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* ===== レスポンシブ対応（タブレット〜PC） ===== */
 @media (min-width: 768px) {
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
-  .quiz-choices button {
-    font-size: 1.3rem;
+  main p, li, .quiz-choices button {
+    font-size: 1.2rem;
   }
 
   .char-box {
-    width: 80px;
-    height: 80px;
-    font-size: 3rem;
+    width: 70px;
+    height: 70px;
+    font-size: 2.5rem;
+  }
+
+  #spots > div {
+    padding: 35px;
   }
 
   button {
