@@ -3,8 +3,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  background-color: #fcf6ed;
-  color: #4b2e1e;
+  background-color: #f7f9fc;
+  color: #2c3e50;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -25,13 +25,13 @@ h1 {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 1em;
-  color: #8b5e3c;
+  color: #34495e;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
 h2 {
   font-size: 1.5rem;
-  color: #6b4c3b;
+  color: #2980b9;
   margin-top: 1.5em;
   margin-bottom: 0.8em;
   text-align: center;
@@ -49,15 +49,15 @@ h2 {
 .char-box {
   width: 60px;
   height: 60px;
-  background-color: #ffecc6;
-  border: 3px solid #f0b35a;
+  background-color: #e0f7fa;
+  border: 3px solid #1abc9c;
   border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
   font-weight: bold;
-  color: #8b5e3c;
+  color: #16a085;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
 }
@@ -68,28 +68,28 @@ h2 {
 
 /* ===== スポットブロック ===== */
 #spots > div {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   margin-bottom: 30px;
-  border: 2px solid #dab48a;
+  border: 2px solid #bdc3c7;
   text-align: center;
 }
 
 #spots > div.completed {
-  background-color: #e6ffe6;
-  border-color: #6aaa5a;
+  background-color: #eafaf1;
+  border-color: #27ae60;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 #spots > div.completed h2 {
-  color: #4b8a4a;
+  color: #27ae60;
 }
 
 #spots > div.completed h2::after {
   content: ' ✅';
-  color: #4b8a4a;
+  color: #27ae60;
   font-size: 1em;
   vertical-align: middle;
   margin-left: 8px;
@@ -100,15 +100,15 @@ input[type="text"] {
   width: calc(100% - 22px);
   padding: 12px;
   margin-bottom: 10px;
-  border: 2px solid #dab48a;
+  border: 2px solid #95a5a6;
   border-radius: 8px;
   font-size: 1.1rem;
-  color: #4b2e1e;
+  color: #2c3e50;
   background-color: #fdfdfd;
 }
 
 input[type="text"]:disabled {
-  background-color: #f0f0f0;
+  background-color: #ecf0f1;
   border-color: #ccc;
   cursor: not-allowed;
 }
@@ -118,7 +118,7 @@ button {
   width: 100%;
   max-width: 300px;
   padding: 12px;
-  background-color: #f0b35a;
+  background-color: #e91e63;
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -132,7 +132,7 @@ button {
 }
 
 button:hover {
-  background-color: #e49d3b;
+  background-color: #c2185b;
   transform: translateY(-2px);
 }
 
@@ -150,13 +150,13 @@ button:disabled {
 
 /* ===== 完了表示 ===== */
 #complete {
-  background-color: #eaffd0;
-  border: 3px dashed #8dcf54;
+  background-color: #dff9fb;
+  border: 3px dashed #22a6b3;
   padding: 30px;
   margin-top: 40px;
   border-radius: 20px;
   text-align: center;
-  color: #4b8a4a;
+  color: #0984e3;
   font-size: 1.3rem;
   font-weight: bold;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -165,7 +165,7 @@ button:disabled {
 #complete a {
   display: inline-block;
   margin-top: 20px;
-  background-color: #f0b35a;
+  background-color: #e91e63;
   color: #fff;
   padding: 12px 25px;
   border-radius: 8px;
@@ -175,7 +175,7 @@ button:disabled {
 }
 
 #complete a:hover {
-  background-color: #e49d3b;
+  background-color: #c2185b;
 }
 
 /* ===== フッター ===== */
@@ -183,14 +183,14 @@ footer {
   text-align: center;
   margin-top: 40px;
   padding: 20px;
-  background-color: #fdf3e7;
-  border-top: 1px solid #eee2d0;
-  color: #6b4c3b;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  color: #7f8c8d;
   font-size: 0.9em;
 }
 
 footer a {
-  color: #b6894c;
+  color: #e91e63;
   text-decoration: none;
   font-weight: bold;
 }
@@ -202,12 +202,12 @@ footer a:hover {
 /* ===== ハンバーガーメニュー ===== */
 header {
   position: relative;
-  background-color: #fdf3e7;
+  background-color: #ffffff;
   padding: 15px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #eee2d0;
+  border-bottom: 1px solid #ddd;
 }
 
 .menu-toggle {
@@ -223,7 +223,7 @@ header {
 .menu-toggle span {
   display: block;
   height: 4px;
-  background: #8b5e3c;
+  background: #2c3e50;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -246,7 +246,7 @@ nav#menu {
   right: -280px;
   width: 240px;
   height: 100vh;
-  background-color: #fff9f0;
+  background-color: #ffffff;
   box-shadow: -3px 0 10px rgba(0,0,0,0.1);
   transition: right 0.3s ease;
   padding: 60px 20px;
@@ -269,7 +269,7 @@ nav#menu ul li {
 
 nav#menu ul li a {
   text-decoration: none;
-  color: #8b5e3c;
+  color: #2c3e50;
   font-size: 1.2rem;
   font-weight: bold;
   transition: color 0.2s ease;
@@ -277,7 +277,7 @@ nav#menu ul li a {
 
 nav#menu ul li a:hover,
 nav#menu ul li a.active {
-  color: #f0b35a;
+  color: #e91e63;
 }
 
 #overlay {
@@ -295,8 +295,9 @@ nav#menu ul li a.active {
   display: block;
 }
 
+/* ===== カードレイアウト（共通） ===== */
 .card {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 12px;
   padding: 20px;
   margin: 20px auto;
@@ -328,7 +329,7 @@ nav#menu ul li a.active {
   margin-top: 20px;
 }
 
-/* ===== レスポンシブ対応（タブレット〜PC） ===== */
+/* ===== レスポンシブ対応 ===== */
 @media (min-width: 768px) {
   h1 {
     font-size: 2.5rem;
