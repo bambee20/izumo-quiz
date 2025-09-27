@@ -119,18 +119,11 @@
         });
     });
 
-    // ゲームリセット機能
-    document.getElementById('resetGame').addEventListener('click', (e) => {
-        e.preventDefault();
-        if (confirm('本当にゲームの進行状況をリセットしますか？集めた文字やニックネームが消えます。')) {
-            localStorage.removeItem("earnedChars");
-            localStorage.removeItem("nickname");
-            location.reload();
-        }
-    });
+
   </script>
 
 </body>
 </html>
+
 
 
