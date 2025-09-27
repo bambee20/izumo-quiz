@@ -1,49 +1,86 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>スポットマップ - 出雲大社クイズラリー</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>スポットマップ - 出雲大社クイズラリー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header>
-    <h1 id="title">出雲大社 クイズラリー</h1>
-    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
+  <header>
+    <h1 id="title">出雲大社 クイズラリー</h1>
+    <div class="menu-toggle" id="menuToggle" aria-label="メニューを開く" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
 
-  <nav id="menu" aria-hidden="true">
-    <ul>
-      <li><a href="index.html">ホーム</a></li>
-      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
-      <li><a href="map.html">スポットマップ</a></li>
+  <nav id="menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="howtoplay.html">ゲームの遊び方</a></li>
+      <li><a href="map.html">スポットマップ</a></li>
       <li><a href="https://docs.google.com/forms/..." target="_blank" id="surveyLink" style="display:none;">📝 アンケートに答える</a></li>
-      <li><a href="#" id="resetGame">🔄 ゲームをリセットする</a></li>     </ul>
-  </nav>
+      <li><a href="#" id="resetGame">🔄 ゲームをリセットする</a></li>
+    </ul>
+  </nav>
 
-  <div id="overlay"></div>
+  <div id="overlay"></div>
 
-  <main>
-    <h1>スポットマップ</h1>
-    <div class="card">
-      <p>以下の地図を参考にして、5つのスポットを探してみよう！</p>
-      
-            <a href="https://www.google.com/maps/place/%E5%87%BA%E9%9B%B2%E5%A4%A7%E7%A4%BE/@35.3941441,132.6841773,17z/data=!3m1!4b1!4m6!3m5!1s0x3558d1976a44f9c3:0x1b70d740c02c6109!8m2!3d35.3941441!4d132.6867522!16zCgVsZWdvcHk?entry=ttu" target="_blank" class="link-btn">🗺️ Googleマップを開く</a>
+  <main>
+    <h1>スポットマップ</h1>
+    <div class="card">
+      <p>以下の地図を参考にして、5つのスポットを探してみよう！</p>
 
-            <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3221.751307616194!2d132.6841773!3d35.3941441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3558d1976a44f9c3%3A0x1b70d740c02c6109!2z5 outOOiQh-Wgt-S4reWjsA!5e0!3m2!1sja!2sjp!4v1678886400000!5m2!1sja!2sjp" 
-        width="100%" height="400" style="border:0; border-radius:12px; margin-top: 1em;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-  </main>
+      <a href="https://www.google.com/maps/place/出雲大社" target="_blank" class="link-btn">🗺️ Googleマップを開く</a>
 
-<script>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3221.751307616194!2d132.6841773!3d35.3941441..."
+        width="100%" height="400"
+        style="border:0; border-radius:12px; margin-top: 1em;"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+      <!-- ★スポットヒントここから -->
+      <h2 style="margin-top:1.5em;">スポットのヒント</h2>
+      <ul style="
+        list-style:none;
+        padding:0;
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+        gap:1em;
+        text-align:center;">
+        <li>
+          <img src="images/ichigo.png" alt="いちご" style="width:60px;height:60px;"><br>
+          <strong>スポット①</strong><br>ヒント：いちごあめ屋さん
+        </li>
+        <li>
+          <img src="images/ebi.png" alt="えび" style="width:60px;height:60px;"><br>
+          <strong>スポット②</strong><br>ヒント：えびの屋
+        </li>
+        <li>
+          <img src="images/nawa.png" alt="縄" style="width:60px;height:60px;"><br>
+          <strong>スポット③</strong><br>ヒント：なわのや
+        </li>
+        <li>
+          <img src="images/otsumami.png" alt="おつまみ" style="width:60px;height:60px;"><br>
+          <strong>スポット④</strong><br>ヒント：おつまみ研究所
+        </li>
+        <li>
+          <img src="images/shimenawa.png" alt="しめ縄" style="width:60px;height:60px;"><br>
+          <strong>スポット⑤</strong><br>ヒント：出雲しめ縄や
+        </li>
+      </ul>
+      <!-- ★スポットヒントここまで -->
+
+    </div>
+  </main>
+
+  <script>
     // ニックネーム取得してタイトルに表示
     const nickname = localStorage.getItem("nickname");
     if (nickname) {
@@ -52,7 +89,7 @@
         document.getElementById("title").textContent = `出雲大社 クイズラリー`;
     }
 
-    // ハンバーガーメニュー動作 (共通関数)
+    // ハンバーガーメニュー動作
     function toggleMenu() {
       const menuToggle = document.getElementById('menuToggle');
       const menu = document.getElementById('menu');
@@ -97,10 +134,10 @@
         if (confirm('本当にゲームの進行状況をリセットしますか？集めた文字やニックネームが消えます。')) {
             localStorage.removeItem("earnedChars");
             localStorage.removeItem("nickname");
-            location.reload(); // ページをリロードして初期状態に戻す
+            location.reload();
         }
     });
-</script>
+  </script>
 
 </body>
 </html>
